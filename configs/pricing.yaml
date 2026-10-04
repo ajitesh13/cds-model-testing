@@ -1,0 +1,5 @@
+# USD per million tokens. Fill from the provider pricing pages; null => cost shown as "unknown".
+# cached_input_per_mtok applies to cache-read tokens. Cache-write tokens are billed at input_per_mtok here.
+claude-opus-5-5:  {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null}
+claude-fable-5-1: {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null}
+gpt-6-astra:      {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null}
