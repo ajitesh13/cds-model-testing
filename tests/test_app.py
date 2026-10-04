@@ -55,7 +55,9 @@ def test_ask_blind(env, monkeypatch):
     at.text_area[0].set_value("What was the AFI?")
     at.button[1].click().run()  # [Log in gone] -> buttons: logout, ask
     page = " ".join(m.value for m in at.markdown)
-    assert "Verified" in page and "AFI 3 cm." in page
+    assert "Citation match" in page and "AFI 3 cm." in page
+    assert not at.exception  # nested expanders (details > cited rows > row) render
+    assert [e.label for e in at.expander][0] == "Details and citations"
     assert not any("claude-opus" in c.value for c in at.caption)  # model hidden in blind mode
     runs = Store(env / "thalamus.db").list_runs()
     assert len(runs) == 1 and runs[0]["source"] == "web" and runs[0]["status"] == "verified"

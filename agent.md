@@ -50,7 +50,7 @@ Phase 1 is the harness only. The eval runner and ratings were removed on purpose
 | `thalamus/store.py` | `Store` (SQLite `runs`, WAL) and `SupabaseStore` (table `thalamus_harness_runs`, PostgREST, SQLite fallback on write failure). `make_store()` picks by env |
 | `supabase/migrations/` | Migration for `thalamus_harness_runs` (same Supabase project as `thalamus_chat_log`; not yet applied) |
 | `thalamus/cli.py` | `ask`, `show-record`, `export` |
-| `app.py` | Streamlit app: `hmac.compare_digest` login, blind or choose model mode, verified/unverified badge, session history |
+| `app.py` | Streamlit app: `hmac.compare_digest` login, blind or choose model mode, "Citation match n/m" badge (green when all pass, orange otherwise), session history |
 | `configs/models.yaml` | Six configs; default `opus-high` (`claude-opus-5-5`, effort high) |
 | `configs/pricing.yaml` | USD per million tokens (input, output, cache read, cache write). Anthropic filled; OpenAI null so cost shows "unknown" |
 | `prompts/system_v1.md` | System prompt v1 (house rules, three answer shapes) |
