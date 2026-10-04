@@ -86,29 +86,7 @@ def render_run(item: dict, expanded: bool) -> None:
         st.markdown(badge)
         st.markdown(f"### {a.answer}")
         with st.expander("Details and citations"):
-            if a.key_caveat:
-                st.warning(a.key_caveat)
-            for d in a.details:
-                st.markdown(f"- {d}")
-            cited = list(dict.fromkeys(c for cl in a.claims for c in cl.cites))
-            if cited:
-                with st.expander(f"Cited rows ({len(cited)})", expanded=False):
-                    for rid in cited:
-                        row = r.rows.get(rid)
-                        with st.expander(rid):
-                            st.write(row.text if row else "Row not found in the record.")
-            if a.conflicts:
-                st.markdown("**Conflicts**")
-                for c in a.conflicts:
-                    st.markdown(f"- {c.topic}: {', '.join(c.rows)}")
-            if a.not_documented:
-                st.markdown("**Not documented**")
-                for n in a.not_documented:
-                    st.markdown(f"- {n}")
-            if r.status == "unverified":
-                with st.expander("Why some citations did not match"):
-                    for f in r.verification.get("failures", []):
-                        st.markdown(f"- Claim {f['claim_index'] + 1}: {f['problem']}")
+            st.code(a.model_dump_json(indent=2), language=None)
         if not blind:
             st.caption(f"{r.config_id} · {r.model_returned} · in {r.input_tokens} (cached {r.cached_input_tokens}, cache-write {r.cache_write_tokens}) "
                        f"· out {r.output_tokens} · cost {fmt_cost(r.cost_usd)} · {r.latency_ms / 1000:.1f}s")
