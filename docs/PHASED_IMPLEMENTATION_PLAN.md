@@ -67,7 +67,8 @@ A small program that takes one patient record and one question, sends both to a 
 - [ ] Deploy to a host with a persistent volume; share URL and credentials with testers (open: Compute Engine VM vs Cloud Run, project `kado-care`, password and API-key handling)
 - [x] `SupabaseStore` and `thalamus_harness_runs` migration written, tested offline (not yet applied to the Supabase project)
 - [x] Migration applied to Supabase project `ygovtjqzztschecrqufq` (2026-10-04); live write and read verified (run b15aecbd, no SQLite fallback used)
-- [ ] GCP deploy section in README (with Supabase the app is stateless, so Cloud Run becomes viable)
+- [x] Deployed to Cloud Run (`thalamus-cds`, kado-care, asia-south1, 2026-10-05) at https://thalamus-cds-4hoqiixfyq-el.a.run.app; GCP deploy section in README. Public URL, gated only by the hardcoded app login; browser end-to-end test by the owner pending
+- [x] Manual GitHub Action redeploy (`.github/workflows/deploy-cds.yml`); one-time `deploy/gcp_ci_setup.sh` still to be run
 
 ### Exit criteria
 

@@ -58,6 +58,9 @@ Phase 1 is the harness only. The eval runner and ratings were removed on purpose
 | `tests/` | Offline tests with mocked adapters; live tests need `RUN_LIVE=1` |
 | `reference/legacy/` | Old curl scripts that use fallbacks. Do not reuse |
 | `Dockerfile` | Image for deployment, data at `/data` |
+| `deploy/gcp_cloud_run.sh` | First deploy / secret changes to Cloud Run (`thalamus-cds`, kado-care, asia-south1). Idempotent, so keep it |
+| `deploy/gcp_ci_setup.sh` | One-time IAM for the GitHub Action (`cds-ci-sa`, bound to this repo only) |
+| `.github/workflows/deploy-cds.yml` | Manual "Run workflow" redeploy: test, build, deploy image, health check |
 
 ## Hard rules
 

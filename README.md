@@ -36,6 +36,20 @@ official pricing page; OpenAI still null, so astra cost is shown as "unknown").
 | `MODEL_SELECTION` | `blind` (default; random config per question, model hidden) or `choose` |
 | `ENABLED_CONFIGS` | Comma-separated config ids the web app may use (default: the YAML default) |
 
+## Deploy to Google Cloud (Cloud Run)
+
+Live: https://thalamus-cds-4hoqiixfyq-el.a.run.app (project `kado-care`, `asia-south1`, service `thalamus-cds`).
+Runs are stored in Supabase, so the container needs no persistent disk.
+
+- **First deploy or changed secrets/env** (needs a local `.env`): `bash deploy/gcp_cloud_run.sh`. Creates the
+  secrets `cds-anthropic-api-key` and `cds-openai-api-key` from `.env`, reuses `thalamus-supabase-service-role-key`,
+  builds with Cloud Build and deploys. Safe to re-run.
+- **Redeploy code from GitHub:** Actions tab, "Deploy Thalamus CDS (Cloud Run)", Run workflow
+  (`.github/workflows/deploy-cds.yml`). Runs the tests, builds, deploys the new image, checks `/_stcore/health`.
+  It updates only the image; env vars, secrets and public access stay as the script set them.
+- **One-time CI setup:** `bash deploy/gcp_ci_setup.sh` creates `cds-ci-sa`, which only
+  `ajitesh13/cds-model-testing` can impersonate through the existing Workload Identity pool.
+
 ## Deployment notes
 
 - Serve only over HTTPS: the login form sends credentials.

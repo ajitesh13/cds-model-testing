@@ -1,0 +1,81 @@
+name: Deploy Thalamus CDS (Cloud Run)
+
+# Manual trigger only: Actions tab -> "Deploy Thalamus CDS (Cloud Run)" -> Run workflow.
+# Redeploys the image only. Env vars, secrets and public access already on the
+# service (set by deploy/gcp_cloud_run.sh) are kept, because `run deploy --image`
+# updates just the image. One-time IAM setup: deploy/gcp_ci_setup.sh.
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: "Run the offline test suite before deploying"
+        type: boolean
+        default: true
+
+permissions:
+  id-token: write   # required for google-github-actions/auth's WIF exchange
+  contents: read
+
+concurrency:
+  group: deploy-cds
+  cancel-in-progress: false
+
+env:
+  PROJECT_ID: kado-care
+  REGION: asia-south1
+  SERVICE: thalamus-cds
+  IMAGE: asia-south1-docker.pkg.dev/kado-care/cloud-run-source-deploy/thalamus-cds
+  BUILD_BUCKET: gs://kado-care-cds-build   # staging bucket owned by cds-ci-sa (see deploy/gcp_ci_setup.sh)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - if: ${{ inputs.run_tests }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - if: ${{ inputs.run_tests }}
+        name: Run tests (offline)
+        run: |
+          pip install -e .
+          python -m pytest -q
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/1078293053413/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: "cds-ci-sa@kado-care.iam.gserviceaccount.com"
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push image
+        run: |
+          gcloud builds submit \
+            --tag="${IMAGE}:${GITHUB_SHA}" \
+            --project="${PROJECT_ID}" \
+            --region="${REGION}" \
+            --gcs-source-staging-dir="${BUILD_BUCKET}/source" \
+            --gcs-log-dir="${BUILD_BUCKET}/logs" \
+            .
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "${SERVICE}" \
+            --image="${IMAGE}:${GITHUB_SHA}" \
+            --region="${REGION}" \
+            --project="${PROJECT_ID}"
+
+      - name: Smoke test
+        run: |
+          URL="$(gcloud run services describe "${SERVICE}" --region="${REGION}" --project="${PROJECT_ID}" --format='value(status.url)')"
+          for i in 1 2 3 4 5 6; do
+            code="$(curl -s -o /dev/null -w '%{http_code}' "${URL}/_stcore/health" || true)"
+            [ "$code" = "200" ] && break; sleep 5
+          done
+          echo "health: ${code}"
+          [ "$code" = "200" ]
+          echo "Deployed ${GITHUB_SHA::7} to ${URL}" | tee -a "$GITHUB_STEP_SUMMARY"
