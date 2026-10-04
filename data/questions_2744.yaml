@@ -1,0 +1,180 @@
+- id: q01
+  tier: lookup
+  phrasings:
+  - What was her most recent amniotic fluid index?
+  answer_key: null
+- id: q02
+  tier: lookup
+  phrasings:
+  - What was her blood pressure at the last recorded visit?
+  answer_key: null
+- id: q03
+  tier: lookup
+  phrasings:
+  - What was the post-void residual volume at her first urogynecology evaluation?
+  answer_key: null
+- id: q04
+  tier: lookup
+  phrasings:
+  - What are her current active diagnoses?
+  answer_key: null
+- id: q05
+  tier: lookup
+  phrasings:
+  - What medications is she currently taking?
+  answer_key: null
+- id: q06
+  tier: lookup
+  phrasings:
+  - What prenatal tests have been ordered or performed in this pregnancy?
+  answer_key: null
+- id: q07
+  tier: lookup
+  phrasings:
+  - Has she ever had pelvic surgery?
+  answer_key: null
+- id: q08
+  tier: lookup
+  phrasings:
+  - Has she ever had a miscarriage?
+  answer_key: null
+- id: q09
+  tier: lookup
+  phrasings:
+  - Has a diagnostic genetic test (amniocentesis, CVS or cfDNA) ever been done in this pregnancy?
+  answer_key: null
+- id: q10
+  tier: conflict_or_missing
+  phrasings:
+  - Is "Down syndrome" a diagnosis of the patient or of the fetus, and what evidence confirms it?
+  answer_key: null
+- id: q11
+  tier: conflict_or_missing
+  phrasings:
+  - How many prior pregnancies and deliveries has she had? Do her records agree?
+  answer_key: null
+- id: q12
+  tier: conflict_or_missing
+  phrasings:
+  - What was her true gestational age on 2023-01-15 and on 2023-02-15, given that both notes say 17 weeks?
+  answer_key: null
+- id: q13
+  tier: timeline
+  phrasings:
+  - How has her amniotic fluid index changed over the third trimester?
+  answer_key: null
+- id: q14
+  tier: timeline
+  phrasings:
+  - How have her urinary symptoms progressed from January to July 2020?
+  answer_key: null
+- id: q15
+  tier: timeline
+  phrasings:
+  - What is the sequence of events in this pregnancy, from the first prenatal visit to admission?
+  answer_key: null
+- id: q16
+  tier: counting
+  phrasings:
+  - How many prenatal visits has she had in this pregnancy?
+  answer_key: null
+- id: q17
+  tier: counting
+  phrasings:
+  - How many encounters has she had with each specialty?
+  answer_key: null
+- id: q18
+  tier: counting
+  phrasings:
+  - How many distinct clinicians have been involved in her care?
+  answer_key: null
+- id: q19
+  tier: interpretation
+  phrasings:
+  - Is her amniotic fluid volume abnormal for gestational age?
+  answer_key: null
+- id: q20
+  tier: interpretation
+  phrasings:
+  - Is her nonstress test reassuring?
+  answer_key: null
+- id: q21
+  tier: interpretation
+  phrasings:
+  - Is her stress urinary incontinence mild, moderate or severe based on the documented findings?
+  answer_key: null
+- id: q22
+  tier: conflict_or_missing
+  phrasings:
+  - Where are the quad screen results, and were they ever documented?
+  answer_key: null
+- id: q23
+  tier: conflict_or_missing
+  phrasings:
+  - What is missing from her record to confirm or exclude fetal trisomy 21?
+  answer_key: null
+- id: q24
+  tier: conflict_or_missing
+  phrasings:
+  - What follow-up is missing for her stress urinary incontinence after July 2020?
+  answer_key: null
+- id: q25
+  tier: timeline
+  phrasings:
+  - Did her urinary symptoms change after she was counselled on Kegel exercises?
+  answer_key: null
+- id: q26
+  tier: timeline
+  phrasings:
+  - How did fetal assessment findings differ before and after the oligohydramnios diagnosis?
+  answer_key: null
+- id: q27
+  tier: timeline
+  phrasings:
+  - Did her vital signs change between the May 2023 visit and the June 2023 admission?
+  answer_key: null
+- id: q28
+  tier: interpretation
+  phrasings:
+  - What could explain her oligohydramnios at this stage of pregnancy?
+  answer_key: null
+- id: q29
+  tier: interpretation
+  phrasings:
+  - What is the likely cause of her stress urinary incontinence?
+  answer_key: null
+- id: q30
+  tier: interpretation
+  phrasings:
+  - Why is the nonstress test showing minimal variability without accelerations?
+  answer_key: null
+- id: q31
+  tier: synthesis
+  phrasings:
+  - Brief me on this patient before her admission for fetal monitoring.
+  answer_key: null
+- id: q32
+  tier: synthesis
+  phrasings:
+  - What are the key risks in this pregnancy right now?
+  answer_key: null
+- id: q33
+  tier: timeline
+  phrasings:
+  - Summarise her gynecologic and urogynecologic history from 2020 onward.
+  answer_key: null
+- id: q34
+  tier: synthesis
+  phrasings:
+  - What is the risk of stillbirth if this pregnancy continues without delivery?
+  answer_key: null
+- id: q35
+  tier: synthesis
+  phrasings:
+  - What is the likely mode and timing of delivery?
+  answer_key: null
+- id: q36
+  tier: synthesis
+  phrasings:
+  - How might her stress urinary incontinence change after this delivery?
+  answer_key: null
