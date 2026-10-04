@@ -5,7 +5,6 @@ from typer.testing import CliRunner
 
 from thalamus.adapters.base import Completion, load_configs
 from thalamus.cli import app
-from thalamus.evaluate import load_questions, run_eval
 from thalamus.pipeline import ask, load_serialized
 from thalamus.store import Store
 
@@ -97,29 +96,6 @@ def test_store_and_export(store, ser, tmp_path):
     for fmt in ("jsonl", "csv"):
         paths = store.export(fmt, tmp_path / fmt)
         assert [p.name for p in paths] == [f"runs.{fmt}"] and r.run_id in paths[0].read_text()
-
-
-def test_eval_resume_and_reports(tmp_path, store, monkeypatch):
-    qs = load_questions("data/questions_2744.yaml")[:3]
-    assert len(load_questions("data/questions_2744.yaml")) == 36
-    qs[0]["answer_key"] = "3 cm"
-    calls = []
-
-    class Ad:
-        def complete(self, cfg, *a, **k):
-            calls.append(1)
-            return Completion(payload(), cfg.model + "-d", 100, 10, 0, 7, {})
-
-    out = tmp_path / "ev"
-    run_eval("data/patient_2744.txt", qs, [CFG], concurrency=2, out_dir=out, store=store, adapter_for=lambda c: Ad())
-    assert len(calls) == 3
-    run_eval("data/patient_2744.txt", qs, [CFG], concurrency=2, out_dir=out, store=store, adapter_for=lambda c: Ad())
-    assert len(calls) == 3  # resume skipped everything
-    metrics = (out / "metrics.csv").read_text().splitlines()
-    assert metrics[1].startswith("opus-high,3,100.0") and "100.0" in metrics[1] and metrics[1].endswith("unknown")
-    grading = (out / "grading.csv").read_text()
-    assert "opus-high" not in grading and "claude" not in grading  # blinded
-    assert (out / "key.csv").read_text().count("opus-high") == 3
 
 
 def test_cli_show_record_and_unknown_config(monkeypatch):

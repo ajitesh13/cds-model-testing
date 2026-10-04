@@ -8,7 +8,7 @@ COPY thalamus ./thalamus
 COPY app.py ./
 COPY configs ./configs
 COPY prompts ./prompts
-COPY data/patient_2744.txt data/questions_2744.yaml ./data/
+COPY data/patient_2744.txt ./data/
 # Editable install keeps configs/, prompts/ and data/ next to the package (the code resolves them relative to it).
 RUN pip install -e . \
  && useradd --uid 10001 --create-home app \

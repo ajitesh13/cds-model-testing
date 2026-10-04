@@ -1,4 +1,4 @@
-"""thalamus CLI: ask, show-record, eval, export."""
+"""thalamus CLI: ask, show-record, export."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -6,13 +6,11 @@ from pathlib import Path
 import typer
 
 from .adapters.base import load_configs
-from .evaluate import load_questions, new_eval_dir, run_eval
 from .pipeline import DEFAULT_PATIENT, ask as ask_pipeline
 from .pipeline import fmt_cost, load_serialized, render_text
 from .store import Store, data_dir
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help="Thalamus CDSS phase 1 test harness")
-ROOT = Path(__file__).resolve().parent.parent
 PATIENT_OPT = typer.Option(DEFAULT_PATIENT, "--patient", help="Patient export text file")
 
 
@@ -45,26 +43,6 @@ def show_record(patient: Path = PATIENT_OPT):
     s = load_serialized(patient)
     typer.echo(s.text)
     typer.echo(f"record_hash: {s.record_hash}")
-
-
-@app.command("eval")
-def eval_(patient: Path = PATIENT_OPT,
-          questions: Path = typer.Option(ROOT / "data" / "questions_2744.yaml", "--questions"),
-          configs: str = typer.Option(None, "--configs", help="all | id1,id2 (default: models.yaml default)"),
-          repeats: int = typer.Option(1, "--repeats", min=1),
-          concurrency: int = typer.Option(4, "--concurrency", min=1, help="Concurrent calls per provider"),
-          out: Path = typer.Option(None, "--out", help="Eval directory; pass an existing one to resume")):
-    """Run every phrasing of every question against every config."""
-    all_cfgs, default = load_configs()
-    ids = list(all_cfgs) if configs == "all" else [c.strip() for c in (configs or default).split(",") if c.strip()]
-    bad = [i for i in ids if i not in all_cfgs]
-    if bad:
-        raise typer.BadParameter(f"unknown configs: {', '.join(bad)}")
-    out_dir = out or new_eval_dir()
-    typer.echo(f"eval dir: {out_dir}")
-    run_eval(patient, load_questions(questions), [all_cfgs[i] for i in ids], repeats=repeats,
-             concurrency=concurrency, out_dir=out_dir)
-    typer.echo(f"wrote {out_dir}/metrics.csv, grading.csv, key.csv, runs.jsonl")
 
 
 @app.command()

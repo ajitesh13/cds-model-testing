@@ -18,8 +18,6 @@ pytest                            # offline; live smoke tests need RUN_LIVE=1
 thalamus show-record
 thalamus ask "What was her most recent amniotic fluid index?"            # default config: opus-high
 thalamus ask --config astra-medium "Has she ever had a miscarriage?"
-thalamus eval --configs opus-high,fable-high --concurrency 4              # -> var/evals/<timestamp>/
-thalamus eval --out var/evals/<existing-dir>                              # resume an interrupted eval
 thalamus export --format csv                                             # dumps all logged runs
 
 APP_USERNAME=me APP_PASSWORD=pw streamlit run app.py
@@ -37,12 +35,6 @@ pricing pages; until then cost is shown as "unknown".
 | `DATA_DIR` | Where `thalamus.db` and `evals/` live (default `./var`, `/data` in Docker) |
 | `MODEL_SELECTION` | `blind` (default; random config per question, model hidden) or `choose` |
 | `ENABLED_CONFIGS` | Comma-separated config ids the web app may use (default: the YAML default) |
-
-## Eval outputs
-
-`var/evals/<timestamp>/`: `runs.jsonl`, `metrics.csv`, `grading.csv` (blinded, random answer IDs),
-`key.csv` (answer ID to config). Answer-key accuracy is computed only for questions whose `answer_key` is set in
-`data/questions_2744.yaml`.
 
 ## Deployment notes
 
