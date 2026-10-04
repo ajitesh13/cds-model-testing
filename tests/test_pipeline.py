@@ -90,19 +90,13 @@ def test_adapter_exception_is_error(store, ser):
     assert r.status == "error" and "boom" in r.error
 
 
-def test_store_rating_and_export(store, ser, tmp_path):
+def test_store_and_export(store, ser, tmp_path):
     r = run(Fake(payload()), store, ser, session_id="s1", rater_label="dr x")
-    rid = store.insert_rating(r.run_id, "correct", "good", "dr x")
-    assert store.list_ratings(r.run_id)[0]["rating_id"] == rid
-    with pytest.raises(Exception):
-        store.insert_rating(r.run_id, "bogus")
-    with pytest.raises(Exception):
-        store.insert_rating("missing-run", "correct")
     assert [x["run_id"] for x in store.list_runs("s1")] == [r.run_id]
+    assert store.list_runs("other") == []
     for fmt in ("jsonl", "csv"):
         paths = store.export(fmt, tmp_path / fmt)
-        assert {p.name for p in paths} == {f"runs.{fmt}", f"ratings.{fmt}"}
-        assert r.run_id in paths[0].read_text() and rid in paths[1].read_text()
+        assert [p.name for p in paths] == [f"runs.{fmt}"] and r.run_id in paths[0].read_text()
 
 
 def test_eval_resume_and_reports(tmp_path, store, monkeypatch):

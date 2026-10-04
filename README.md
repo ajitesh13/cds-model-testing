@@ -2,7 +2,7 @@
 
 Test bench for a clinical decision support assistant (obstetrics and gynecology). The whole serialized patient
 record plus one question goes to a selectable LLM; citations in the answer are checked against the record by
-deterministic code; every run is logged to SQLite; testers grade answers in a login-protected web page.
+deterministic code; every run is logged to SQLite; testers ask questions in a login-protected web page and a doctor reviews the answers by hand.
 
 Plain Python. The only non-deterministic step is the single model call (plus at most one schema retry and
 one citation retry). No fallback models are ever configured.
@@ -20,7 +20,7 @@ thalamus ask "What was her most recent amniotic fluid index?"            # defau
 thalamus ask --config astra-medium "Has she ever had a miscarriage?"
 thalamus eval --configs opus-high,fable-high --concurrency 4              # -> var/evals/<timestamp>/
 thalamus eval --out var/evals/<existing-dir>                              # resume an interrupted eval
-thalamus export --format csv
+thalamus export --format csv                                             # dumps all logged runs
 
 APP_USERNAME=me APP_PASSWORD=pw streamlit run app.py
 ```

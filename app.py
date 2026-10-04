@@ -1,4 +1,4 @@
-"""Thalamus tester app (Streamlit): login, ask any question, verified answers with citations, ratings."""
+"""Thalamus tester app (Streamlit): login, ask any question, verified answers with citations."""
 import hmac
 import os
 import random
@@ -12,8 +12,6 @@ from thalamus.pipeline import DEFAULT_PATIENT, ask, fmt_cost, load_serialized
 from thalamus.store import Store
 
 st.set_page_config(page_title="Thalamus", page_icon="🩺", layout="centered")
-
-GRADES = {"correct": "Correct", "minor_error": "Minor error", "major_error": "Major error", "unsafe": "Unsafe"}
 
 APP_USERNAME = os.environ.get("APP_USERNAME")
 APP_PASSWORD = os.environ.get("APP_PASSWORD")
@@ -43,7 +41,6 @@ def check_login(user: str, password: str) -> bool:
 st.session_state.setdefault("authed", False)
 st.session_state.setdefault("session_id", uuid.uuid4().hex)
 st.session_state.setdefault("history", [])  # newest first
-st.session_state.setdefault("rated", {})
 
 if not st.session_state.authed:
     st.title("Thalamus")
@@ -102,20 +99,6 @@ def render_run(item: dict, expanded: bool) -> None:
         if not blind:
             st.caption(f"{r.config_id} · {r.model_returned} · in {r.input_tokens} (cached {r.cached_input_tokens}) "
                        f"· out {r.output_tokens} · cost {fmt_cost(r.cost_usd)} · {r.latency_ms / 1000:.1f}s")
-        if r.run_id in st.session_state.rated:
-            st.success(f"Rated: {GRADES[st.session_state.rated[r.run_id]]}")
-        else:
-            with st.form(f"rate_{r.run_id}"):
-                grade = st.radio("How was this answer?", list(GRADES), format_func=GRADES.get,
-                                 horizontal=True, index=None)
-                comment = st.text_area("Comment (optional)")
-                if st.form_submit_button("Submit rating"):
-                    if grade is None:
-                        st.warning("Choose a rating first.")
-                    else:
-                        store.insert_rating(r.run_id, grade, comment, st.session_state.get("rater_label", ""))
-                        st.session_state.rated[r.run_id] = grade
-                        st.rerun()
 
 
 top = st.columns([4, 1])

@@ -53,7 +53,7 @@ def test_login_required_and_wrong_password(env, monkeypatch):
     assert any("Incorrect" in e.value for e in at.error) and not at.text_area
 
 
-def test_ask_rate_blind(env, monkeypatch):
+def test_ask_blind(env, monkeypatch):
     class Fake:
         def complete(self, cfg, *a, **k):
             return Completion(GOOD, cfg.model + "-d", 100, 10, 0, 5, {})
@@ -69,11 +69,7 @@ def test_ask_rate_blind(env, monkeypatch):
     assert not any("claude-opus" in c.value for c in at.caption)  # model hidden in blind mode
     runs = Store(env / "thalamus.db").list_runs()
     assert len(runs) == 1 and runs[0]["source"] == "web" and runs[0]["status"] == "verified"
-    # rate it
-    at.radio[0].set_value("minor_error")
-    next(b for b in at.button if b.label == "Submit rating").click().run()
-    ratings = Store(env / "thalamus.db").list_ratings()
-    assert len(ratings) == 1 and ratings[0]["grade"] == "minor_error" and ratings[0]["run_id"] == runs[0]["run_id"]
+    assert not any("rating" in b.label.lower() for b in at.button) and not at.radio  # no rating UI
 
 
 def test_error_run_is_friendly_and_stored(env, monkeypatch):

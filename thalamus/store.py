@@ -1,4 +1,4 @@
-"""SQLite storage for runs and ratings. DB at $DATA_DIR/thalamus.db (default ./var)."""
+"""SQLite storage for runs. DB at $DATA_DIR/thalamus.db (default ./var)."""
 from __future__ import annotations
 
 import json
@@ -18,11 +18,6 @@ CREATE TABLE IF NOT EXISTS runs(
   answer_json TEXT, verification_json TEXT, format_checks_json TEXT, raw_response_json TEXT,
   input_tokens INTEGER, output_tokens INTEGER, cached_input_tokens INTEGER, cost_usd REAL,
   latency_ms INTEGER, retries INTEGER, error TEXT);
-CREATE TABLE IF NOT EXISTS ratings(
-  rating_id TEXT PRIMARY KEY, run_id TEXT REFERENCES runs(run_id), created_at TEXT,
-  grade TEXT CHECK (grade IN ('correct','minor_error','major_error','unsafe')),
-  comment TEXT, rater_label TEXT);
-CREATE INDEX IF NOT EXISTS ratings_run ON ratings(run_id);
 CREATE INDEX IF NOT EXISTS runs_session ON runs(session_id, created_at);
 """
 
@@ -32,7 +27,6 @@ RUN_COLUMNS = [
     "status", "answer_json", "verification_json", "format_checks_json", "raw_response_json",
     "input_tokens", "output_tokens", "cached_input_tokens", "cost_usd", "latency_ms", "retries", "error",
 ]
-RATING_COLUMNS = ["rating_id", "run_id", "created_at", "grade", "comment", "rater_label"]
 
 
 def now_iso() -> str:
@@ -76,12 +70,6 @@ class Store:
                   [json.dumps(v) if isinstance(v, (dict, list)) else v for v in fields.values()])
         return fields["run_id"]
 
-    def insert_rating(self, run_id: str, grade: str, comment: str = "", rater_label: str = "") -> str:
-        rid = uuid.uuid4().hex
-        self._run("INSERT INTO ratings(rating_id,run_id,created_at,grade,comment,rater_label) VALUES(?,?,?,?,?,?)",
-                  (rid, run_id, now_iso(), grade, comment, rater_label))
-        return rid
-
     def get_run(self, run_id: str) -> dict | None:
         rows = self._run("SELECT * FROM runs WHERE run_id=?", (run_id,))
         return dict(rows[0]) if rows else None
@@ -93,19 +81,12 @@ class Store:
             rows = self._run("SELECT * FROM runs WHERE session_id=? ORDER BY created_at, run_id", (session_id,))
         return [dict(r) for r in rows]
 
-    def list_ratings(self, run_id: str | None = None) -> list[dict]:
-        if run_id is None:
-            rows = self._run("SELECT * FROM ratings ORDER BY created_at, rating_id")
-        else:
-            rows = self._run("SELECT * FROM ratings WHERE run_id=? ORDER BY created_at", (run_id,))
-        return [dict(r) for r in rows]
-
     def export(self, fmt: str, out_dir: str | Path) -> list[Path]:
         import csv
         out = Path(out_dir)
         out.mkdir(parents=True, exist_ok=True)
         written = []
-        for name, rows, cols in (("runs", self.list_runs(), RUN_COLUMNS), ("ratings", self.list_ratings(), RATING_COLUMNS)):
+        for name, rows, cols in (("runs", self.list_runs(), RUN_COLUMNS),):
             p = out / f"{name}.{fmt}"
             with p.open("w", encoding="utf-8", newline="") as f:
                 if fmt == "jsonl":

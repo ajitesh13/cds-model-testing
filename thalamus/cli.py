@@ -70,7 +70,7 @@ def eval_(patient: Path = PATIENT_OPT,
 @app.command()
 def export(fmt: str = typer.Option("jsonl", "--format", help="jsonl or csv"),
            out: Path = typer.Option(None, "--out", help="Output directory (default $DATA_DIR/export)")):
-    """Dump runs and ratings."""
+    """Dump all logged runs."""
     if fmt not in ("jsonl", "csv"):
         raise typer.BadParameter("format must be jsonl or csv")
     for p in Store().export(fmt, out or data_dir() / "export"):
