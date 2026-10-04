@@ -1,0 +1,144 @@
+1. **What was her most recent amniotic fluid index?**
+Her most recent amniotic fluid index was 4 cm (recorded on 2023-06-15).
+*Confidence level: High*
+
+2. **What was her blood pressure at the last recorded visit?**
+Her blood pressure at the last recorded visit was 122/78 mmHg.
+*Confidence level: High*
+
+3. **What was the post-void residual volume at her first urogynecology evaluation?**
+Her post-void residual volume was 25 mL, measured during her initial incontinence evaluation in the Obstetrics & Gynecology department on 2020-01-15.
+*Confidence level: High*
+
+4. **What are her current active diagnoses?**
+Her active problem list includes: Stress urinary incontinence, Uterine leiomyoma, Down syndrome (fetal), Oligohydramnios, and Generalized anxiety disorder.
+*Confidence level: High*
+
+5. **What medications is she currently taking?**
+She is currently taking a Prenatal vitamin (1 tablet daily).
+*Confidence level: High*
+
+6. **What prenatal tests have been ordered or performed in this pregnancy?**
+She declined first-trimester screening. In the second trimester, a maternal serum quad screen was ordered/consented to, and an anatomy ultrasound was performed. In the third trimester, ultrasounds to assess amniotic fluid index (AFI) and a nonstress test (NST) were performed.
+*Confidence level: High*
+
+7. **Has she ever had pelvic surgery?**
+Yes, her surgical history notes a dilation and curettage (D&C) for a first-trimester miscarriage. (Note: One of her subjective histories contradictorily claims she denies pelvic surgery).
+*Confidence level: High*
+
+8. **Has she ever had a miscarriage?**
+Yes, she had a first-trimester miscarriage requiring a dilation and curettage.
+*Confidence level: High*
+
+9. **Has a diagnostic genetic test (amniocentesis, CVS or cfDNA) ever been done in this pregnancy?**
+No. There is no record of a definitive diagnostic genetic test (amniocentesis or CVS) or cfDNA being performed; only screening tests (ultrasounds and quad screen) are documented.
+*Confidence level: High*
+
+10. **Is "Down syndrome" a diagnosis of the patient or of the fetus, and what evidence confirms it?**
+It is a diagnosis of the fetus. Evidence supporting this includes second-trimester ultrasound markers (increased nuchal translucency, hypoplastic nasal bone, shortened femur length, and possible endocardial cushion defect). However, definitive genetic testing confirmation is absent from the records.
+*Confidence level: High*
+
+11. **How many prior pregnancies and deliveries has she had? Do her records agree?**
+Her records are highly contradictory. Her surgical history consistently lists four repeat spontaneous vaginal deliveries and one miscarriage. However, various HPI sections state she has had 0, 1, 2, or 4 prior vaginal deliveries. 
+*Confidence level: High*
+
+12. **What was her true gestational age on 2023-01-15 and on 2023-02-15, given that both notes say 17 weeks?**
+If she was accurately 17 weeks pregnant on 2023-01-15, her true gestational age on 2023-02-15 would have been approximately 21 weeks. The EHR likely contains a cloned or duplicated note.
+*Confidence level: High*
+
+13. **How has her amniotic fluid index changed over the third trimester?**
+It increased slightly from 3 cm in May 2023 to 4 cm in June 2023, though both values represent severe oligohydramnios.
+*Confidence level: High*
+
+14. **How have her urinary symptoms progressed from January to July 2020?**
+Her symptoms progressively worsened over this six-month period. She started with low-volume leakage triggered by sneezing/exercising, and by April she developed added urinary frequency and urgency, culminating in a positive cough stress test by July.
+*Confidence level: High*
+
+15. **What is the sequence of events in this pregnancy, from the first prenatal visit to admission?**
+At her 17-week visit (Jan 2023), she expressed anxiety about chromosomal abnormalities; an ultrasound revealed structural markers for Down syndrome, and she consented to a quad screen. A follow-up visit occurred in February. In the third trimester (May 2023), she reported decreased fetal movement, leading to an oligohydramnios diagnosis (AFI 3 cm) and a non-reassuring nonstress test. In June 2023, she was admitted for inpatient fetal monitoring due to persistently decreased movements and an AFI of 4 cm.
+*Confidence level: High*
+
+16. **How many prenatal visits has she had in this pregnancy?**
+She has 4 documented outpatient prenatal encounters (Encounters 4 and 5 on Jan 15, Encounter 6 on Feb 15, and Encounter 7 on May 15) and 1 inpatient admission (Encounter 8 on June 15).
+*Confidence level: High*
+
+17. **How many encounters has she had with each specialty?**
+Obstetrics & Gynecology: 7 encounters. 
+Urogynecology: 1 encounter.
+*Confidence level: High*
+
+18. **How many distinct clinicians have been involved in her care?**
+Five distinct clinicians have been involved: Dr. Sarah Chen, Dr. Maria Rodriguez, Dr. Jennifer Park, Dr. Amara Okafor, and Dr. David Kim.
+*Confidence level: High*
+
+19. **Is her amniotic fluid volume abnormal for gestational age?**
+Yes, it is abnormally low. An AFI of 3–4 cm indicates severe oligohydramnios.
+*Confidence level: High*
+
+20. **Is her nonstress test reassuring?**
+No, her nonstress test is non-reassuring as it shows minimal fetal heart rate variability with no accelerations and no decelerations.
+*Confidence level: High*
+
+21. **Is her stress urinary incontinence mild, moderate or severe based on the documented findings?**
+It likely progressed from mild to moderate. Initially presenting as low-volume loss with normal frequency, it worsened to include frequency, urgency, daily pad use, a positive cough stress test, and social embarrassment. 
+*Confidence level: High*
+
+22. **Where are the quad screen results, and were they ever documented?**
+The quad screen results are missing and were never documented in any of the provided notes.
+*Confidence level: High*
+
+23. **What is missing from her record to confirm or exclude fetal trisomy 21?**
+The results of her quad screen, as well as a definitive diagnostic genetic test such as amniocentesis, chorionic villus sampling (CVS), or cell-free DNA (cfDNA), are missing.
+*Confidence level: High*
+
+24. **What follow-up is missing for her stress urinary incontinence after July 2020?**
+There are no documented follow-up visits, referrals to pelvic floor physical therapy, or surgical/pessary interventions for her progressively worsening incontinence after July 2020.
+*Confidence level: High*
+
+25. **Did her urinary symptoms change after she was counselled on Kegel exercises?**
+Yes, despite being counseled on Kegel exercises in January 2020, her urinary leakage progressively worsened over the subsequent six months.
+*Confidence level: High*
+
+26. **How did fetal assessment findings differ before and after the oligohydramnios diagnosis?**
+Before the diagnosis (second trimester), fetal heart tones were normal and fundal height was appropriate, though structural markers for Down syndrome were found. After the diagnosis (third trimester), fetal assessment showed decreased fetal movements, a non-reassuring nonstress test with minimal variability and absent accelerations, and severe oligohydramnios.
+*Confidence level: High*
+
+27. **Did her vital signs change between the May 2023 visit and the June 2023 admission?**
+Her vital signs remained relatively stable. Her blood pressure slightly increased from 120/78 to 122/78 mmHg, and her heart rate increased from 82 to 88 bpm. Fetal heart rate remained steady at 140 bpm.
+*Confidence level: High*
+
+28. **What could explain her oligohydramnios at this stage of pregnancy?**
+It could be explained by placental insufficiency, fetal cardiac anomalies (such as the suspected endocardial cushion defect), other fetal chromosomal abnormalities (like Down syndrome), or issues related to advanced maternal age.
+*Confidence level: Medium*
+
+29. **What is the likely cause of her stress urinary incontinence?**
+The likely cause is pelvic floor muscle laxity and weakness resulting from multiparity (four full-term vaginal deliveries) and prolonged second-stage labor complications. Pelvic pressure from her enlarged uterine leiomyoma may also be contributing.
+*Confidence level: High*
+
+30. **Why is the nonstress test showing minimal variability without accelerations?**
+Minimal variability and a lack of accelerations typically indicate fetal central nervous system depression, which in this case is likely due to fetal hypoxia or acidosis secondary to severe oligohydramnios, placental insufficiency, and potential fetal cardiac/chromosomal anomalies.
+*Confidence level: High*
+
+31. **Brief me on this patient before her admission for fetal monitoring.**
+The patient is an older multiparous female with a history of stress urinary incontinence, anxiety, and uterine fibroids. She is currently in the third trimester of a spontaneously conceived pregnancy that is complicated by suspected fetal Down syndrome (based on second-trimester ultrasound markers). She recently developed severe oligohydramnios and a non-reassuring nonstress test alongside maternal reports of decreased fetal movement, prompting her admission for inpatient monitoring.
+*Confidence level: High*
+
+32. **What are the key risks in this pregnancy right now?**
+The key immediate risks are fetal hypoxia/acidosis, umbilical cord compression (due to low fluid), stillbirth, and the need for emergent preterm delivery. There are also neonatal risks associated with managing suspected chromosomal and congenital cardiac anomalies.
+*Confidence level: High*
+
+33. **Summarise her gynecologic and urogynecologic history from 2020 onward.**
+In early 2020, she presented with stress urinary incontinence tied to a history of multiple vaginal deliveries. This progressively worsened over six months to include urgency and a positive stress test, despite behavioral counselling. During this time, she was also diagnosed with a symptomatic uterine leiomyoma causing menorrhagia and pelvic pressure. No further advanced urogynecological interventions or surgical treatments were documented before she became pregnant again in 2022.
+*Confidence level: High*
+
+34. **What is the risk of stillbirth if this pregnancy continues without delivery?**
+There is a significantly elevated risk of stillbirth if the pregnancy continues, given the presence of severe oligohydramnios, decreased fetal movement, and non-reassuring fetal heart monitoring.
+*Confidence level: High*
+
+35. **What is the likely mode and timing of delivery?**
+Immediate or urgent delivery is highly likely indicated due to fetal distress. A Cesarean section is the most probable mode of delivery to avoid further fetal stress and cord compression during labor.
+*Confidence level: Medium*
+
+36. **How might her stress urinary incontinence change after this delivery?**
+Her stress urinary incontinence is likely to persist or worsen post-delivery due to the increased weight and strain placed on the pelvic floor during this pregnancy, regardless of the ultimate mode of delivery.
+*Confidence level: High*

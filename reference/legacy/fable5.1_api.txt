@@ -1,0 +1,193 @@
+# Patient 2744 — Answers to Down Syndrome Question Set
+
+**Record-quality caveats that affect several answers:** (a) obstetric history is inconsistent — the structured PSH at all 8 encounters says 4 vaginal deliveries + 1 miscarriage/D&C, but narrative text variously says 0, 1, 2 or 4 prior deliveries; (b) Encounters 5 and 6 are near-verbatim copy-forward notes, both labelled "17 weeks" despite being a month apart; (c) several PLAN sections end mid-sentence; (d) no quad-screen result, no diagnostic genetic test, and no plan after the non-reactive NST are documented.
+
+---
+
+**1. Most recent amniotic fluid index?**
+AFI **4 cm**, on 2023-06-15 (inpatient admission, Dr. Kim). Prior value 3 cm on 2023-05-15.
+*Confidence: High*
+
+**2. Blood pressure at last recorded visit?**
+**122/78 mmHg** (2023-06-15), with maternal HR 88 bpm and FHR 140 bpm.
+*Confidence: High*
+
+**3. Post-void residual at first urogynecology evaluation?**
+**25 mL** (normal), recorded 2020-01-15 at her initial incontinence evaluation. Note this visit was in OB/GYN (Dr. Chen); the actual Urogynecology visit (2020-07-15, Dr. Rodriguez) recorded no PVR. 25 mL is the only PVR in the record.
+*Confidence: High (value); the "urogynecology" label is a nuance*
+
+**4. Current active diagnoses?**
+Per the 2023-06-15 problem list: stress urinary incontinence (dx 2020-01-15); uterine leiomyoma (dx 2020-04-15); "Down syndrome" (dx 2023-01-15 — actually a *suspected fetal* diagnosis, unconfirmed); oligohydramnios (dx 2023-05-15); generalized anxiety disorder. Also active but not on the list: term pregnancy (~38–39 wk) at advanced maternal age (45), decreased fetal movement, prior non-reactive NST. Header comorbidities: personal history of cholelithiasis, multiparity.
+*Confidence: High*
+
+**5. Current medications?**
+Prenatal vitamin, 1 tablet daily — nothing else. NKDA.
+*Confidence: High*
+
+**6. Prenatal tests ordered/performed this pregnancy?**
+- First-trimester screening — **declined**.
+- Second-trimester maternal serum **quad screen** — consented/ordered 2023-01-15 (repeated in the 2/15 note); **results never documented**.
+- Second-trimester ultrasound (~17 wk): increased nuchal translucency (at 17 wk this would properly be a nuchal fold), hypoplastic nasal bone, shortened femur, possible endocardial cushion defect.
+- Doppler fetal heart tones + fundal height (1/15/23).
+- Third-trimester ultrasound for AFI: 3 cm (5/15/23), 4 cm (6/15/23); FHR 140 both times.
+- **Non-stress test** (5/15/23): minimal variability, no accelerations, no decelerations.
+Not documented: cfDNA, amniocentesis/CVS, fetal echo, growth biometry/EFW, umbilical artery Doppler, BPP, routine prenatal labs (CBC, type/screen, GDM screen, GBS), repeat NST at admission.
+*Confidence: High (for what is documented)*
+
+**7. Ever had pelvic surgery?**
+No *major* pelvic surgery (no cesarean, hysterectomy, myomectomy, or anti-incontinence procedure). The only pelvic procedure is a **D&C for a first-trimester miscarriage**, listed in the structured PSH at every encounter. The 2020-04-15 note says she "denies any history of pelvic surgery" — consistent only if the D&C is not counted.
+*Confidence: Medium (internal inconsistency)*
+
+**8. Ever had a miscarriage?**
+**Yes** — one first-trimester miscarriage managed by D&C (structured PSH at all 8 encounters; explicitly stated in the 2023-01-15 HPI). Contradicted only by the implausible 2020-04-15 statement "She has not been pregnant before."
+*Confidence: High*
+
+**9. Diagnostic genetic test (amnio/CVS/cfDNA) done this pregnancy?**
+**No.** None is documented. Only a quad screen (result missing) and ultrasound were done. (cfDNA is itself a screening test, not diagnostic.) The PLAN sentences that might have led to a recommendation are truncated.
+*Confidence: High*
+
+**10. Is "Down syndrome" the patient's or the fetus's diagnosis, and what confirms it?**
+It refers to the **fetus**. The patient is a 45-year-old marketing consultant with no such history and a negative family history; the "diagnosis date" (2023-01-15) coincides with the 17-week ultrasound. **Nothing confirms it.** It rests solely on sonographic markers (increased nuchal measurement, hypoplastic nasal bone, short femur, possible endocardial cushion/AV canal defect) in an AMA pregnancy. These are strongly associated with trisomy 21 (especially AVSD) but are not diagnostic. No karyotype, no cfDNA, no quad result. It should be coded as "suspected fetal trisomy 21," not "Down syndrome."
+*Confidence: High*
+
+**11. Prior pregnancies/deliveries — do records agree?**
+**No, they disagree.** Structured header/PSH (identical at all 8 encounters): 4 term spontaneous vaginal deliveries + 1 first-trimester miscarriage → G5 P4 A1 before this pregnancy (currently G6 P4014; living children not documented). Narratives: Enc 1 "four full-term vaginal deliveries" (agrees); Enc 2 "has not been pregnant before"; Enc 3 "two vaginal deliveries"; Enc 4 "one prior healthy vaginal delivery and one miscarriage"; Enc 5/6 "prior pregnancies unremarkable" (contradicts the prolonged second stage); Enc 7 "first pregnancy … SVD at 39 weeks." Best estimate: **5 prior pregnancies, 4 deliveries.**
+*Confidence: Medium*
+
+**12. True gestational age on 2023-01-15 and 2023-02-15?**
+Both cannot be 17 weeks. Anchoring to **17w0d on 2023-01-15** (more plausible: fits a second-trimester scan, the 15–22-wk quad-screen window, the "third-trimester" visit on 5/15 at ~34w1d, and term admission on 6/15 at ~38w4d; implied EDD ≈ 2023-06-25), the **2023-02-15 visit was ~21w3d**. The "17 weeks" on 2/15 is a copy-forward error (the entire note duplicates January). If 17 wk were correct on 2/15, then 1/15 would be ~12–13 wk — incompatible with a "second-trimester ultrasound" and quad screen.
+*Confidence: Medium (no LMP/EDD/dating scan in record)*
+
+**13. AFI change over the third trimester?**
+3 cm (5/15/23, ~34 wk) → 4 cm (6/15/23, ~38–39 wk). Both ≤5 cm; the 1-cm difference is within measurement variability, so this is **persistent, non-resolving severe oligohydramnios over ~4 weeks**, not true improvement. Only two values exist.
+*Confidence: High (values) / Medium (interpretation)*
+
+**14. Urinary symptom progression Jan → Jul 2020?**
+- **Jan:** pure SUI — low-volume leakage with laughing/jumping/exercise/sneezing since last delivery (~2018); daily pads; normal frequency; no urgency/nocturia/dysuria; PVR 25 mL; mild uterine descent, slight anterior wall laxity. Kegels advised.
+- **Apr:** leakage with cough/sneeze "progressively worsened"; CC newly reports 6-month frequency/urgency (inconsistent with January ROS — possible mixed component or template artifact); UA normal. New gyn findings: menorrhagia, pelvic pressure, irregularly enlarged uterus → leiomyoma.
+- **Jul (Urogyn):** "progressively worsening over six months" with cough/exercise; **positive cough stress test** (objective confirmation); BMI 26; UA normal; no treatment plan documented.
+Net: progressive worsening over 6 months despite conservative advice, with objective confirmation.
+*Confidence: High*
+
+**15. Sequence of events this pregnancy?**
+1. ~Sept 2022: spontaneous conception (back-calculated). First-trimester screening declined (no visit in record).
+2. **2023-01-15 (17 wk, Dr. Park, two notes):** anxiety about AMA aneuploidy risk; exam normal, FHT by Doppler, fundal height appropriate; agrees to quad screen. Same day, second-trimester US shows aneuploidy markers + possible endocardial cushion defect; counseled; "Down syndrome" added to problem list.
+3. **2023-02-15 (~21 wk, Dr. Okafor):** visit "for screening results," but note is a verbatim duplicate of January; no results; still labelled 17 wk.
+4. Feb–May 2023: no documented visits (~13-week gap).
+5. **2023-05-15 (~34 wk, Dr. Park):** decreased FM ×24 h; BP 120/78, HR 82, FHR 140; AFI 3 cm → oligohydramnios; NST non-reactive. No plan documented.
+6. **2023-06-15 (~38–39 wk, Dr. Kim):** inpatient admission for continued decreased FM and confirmed oligohydramnios; BP 122/78, HR 88, FHR 140; AFI 4 cm. Delivery/outcome not documented.
+*Confidence: High (events) / Medium (GA estimates)*
+
+**16. Number of prenatal visits this pregnancy?**
+**5 pregnancy-related encounters**: 4 outpatient (Enc 4 & 5 both 2023-01-15 — likely one visit in two notes; Enc 6 on 2/15; Enc 7 on 5/15) across **3 distinct dates**, plus 1 inpatient admission (6/15). Standard care from 17–38 wk would be ~8–10 visits and the HPI says "regular prenatal care," so documentation is incomplete.
+*Confidence: High (count) / Medium (interpretation)*
+
+**17. Encounters per specialty?**
+OB/GYN: **7** (6 outpatient + 1 inpatient — Enc 1, 2, 4, 5, 6, 7, 8). Urogynecology: **1** (Enc 3, 2020-07-15). Total 8.
+*Confidence: High*
+
+**18. Distinct clinicians?**
+**5 attendings:** Dr. Sarah Chen (OB/GYN, 2 visits 2020); Dr. Maria Rodriguez (Urogyn, 1); Dr. Jennifer Park (OB/GYN, 3 — 1/15/23 ×2, 5/15/23); Dr. Amara Okafor (OB/GYN, 1 — 2/15/23); Dr. David Kim (OB/GYN inpatient, 1 — 6/15/23).
+*Confidence: High*
+
+**19. Is amniotic fluid volume abnormal for GA?**
+**Yes.** AFI ≤5 cm defines oligohydramnios at any GA; the 5th percentile at 34–39 wk is ~6.5–8 cm and the median ~12–14 cm. Values of 3 and 4 cm are well below the 2.5th percentile — **severe oligohydramnios**, not the mild physiologic decline seen near term.
+*Confidence: High*
+
+**20. Is the NST reassuring?**
+**No — non-reactive.** Reactivity (≥32 wk) requires ≥2 accelerations ≥15 bpm × 15 s in 20 min with moderate variability; she had minimal variability and no accelerations. Absence of decelerations is the only favorable feature (Category II pattern). With decreased FM and AFI 3 cm at ~34 wk, this required immediate further evaluation (extended tracing/VAS, BPP, UA Doppler, consideration of delivery) — none documented.
+*Confidence: High*
+
+**21. SUI severity?**
+**Mild-to-moderate — most consistent with moderate** by symptom-based indices. Toward mild: low-volume ("drops") leakage only with high-impact triggers, normal frequency, PVR 25 mL, minimal prolapse. Toward moderate: daily leakage requiring daily pads (Sandvik index: daily × drops ≈ "moderate"), progressive worsening, positive cough stress test, social/QOL impact, urogyn referral. No validated questionnaire, pad test or urodynamics documented.
+*Confidence: Medium*
+
+**22. Where are the quad screen results?**
+**Not documented anywhere.** Consent/order appears 2023-01-15 (both notes) and is repeated verbatim in the 2023-02-15 note whose stated purpose was "screening results" — yet no AFP/hCG/uE3/inhibin-A values appear in any LABS section, and the PLAN ends mid-sentence ("Based on these findings,"). Either never performed or never charted.
+*Confidence: High*
+
+**23. What is missing to confirm or exclude fetal trisomy 21?**
+- Quad-screen result (or documentation it was never drawn).
+- **Amniocentesis** with karyotype/FISH ± microarray — the definitive test; she was eligible at 17 wk (CVS window had passed).
+- cfDNA/NIPT result if she wanted high-sensitivity screening first (still not diagnostic).
+- Detailed anatomy survey and **fetal echocardiogram** to characterize the AV canal defect (~40–50% associated with T21).
+- Genetic counseling note and documentation of her informed decision.
+- Postnatal plan: neonatal karyotype and echo.
+- Correct dating and correct nuchal measurement (nuchal fold, not NT, at 17 wk).
+*Confidence: High*
+
+**24. Follow-up missing for SUI after July 2020?**
+- No plan at the 7/15/20 urogyn visit (no pelvic floor PT referral, continence pessary/insert, surgical counseling such as midurethral sling/bulking).
+- No objective quantification (pad test, ICIQ-UI/UDI-6, urodynamics/leak-point pressure, urethral mobility, POP-Q).
+- No evaluation of the April frequency/urgency (possible mixed incontinence).
+- No SUI visit for 2.5 years (Jul 2020 → Jan 2023) and no reassessment during pregnancy despite remaining on the problem list.
+- No documented adherence to or response from Kegels.
+- Related gaps: leiomyoma never imaged, no CBC/ferritin for menorrhagia, no fibroid management plan; no postpartum pelvic-floor plan.
+*Confidence: High*
+
+**25. Did urinary symptoms change after Kegel counselling?**
+**Yes — they worsened.** Counseled 1/15/20 → "progressively worsened" 4/15/20 → "progressively worsening over six months" with positive cough stress test 7/15/20. Adherence, technique, formal PFPT, and pelvic-floor strength were never documented, so whether she actually performed the exercises is unknown.
+*Confidence: High (worsening) / Medium (attribution)*
+
+**26. Fetal assessment before vs after the oligohydramnios diagnosis?**
+- **Before (Jan–Feb 2023, 17–21 wk):** focus on aneuploidy/structure — FHT present, fundal height appropriate, US with aneuploidy markers and possible AVSD; fluid not commented on (presumed normal); pregnancy called "uncomplicated."
+- **At/after (May–Jun 2023, 34–39 wk):** focus shifted to fetal well-being — new decreased FM, new severe oligohydramnios (3→4 cm), new non-reactive NST, FHR baseline 140 both visits; admission.
+- **Never documented:** growth/EFW (despite short femur at 17 wk), UA Doppler, BPP, fetal echo, repeat NST at admission.
+*Confidence: High*
+
+**27. Vital-sign change May → June 2023?**
+BP 120/78 → 122/78 (stable, normotensive — no sign of preeclampsia); maternal HR 82 → 88 (minor rise, normal); FHR 140 → 140 (unchanged, normal baseline). No temperature, RR, weight or SpO₂ documented.
+*Confidence: High*
+
+**28. What could explain her oligohydramnios?**
+Most likely **uteroplacental insufficiency (± growth restriction)** — supported by decreased FM, non-reactive NST, AMA, fibroid uterus, and an aneuploid/anomalous fetus; reduced renal perfusion lowers fetal urine output. Also consider/exclude:
+- The fetal aneuploidy and anomalies themselves (T21 with AVSD; short femur may reflect FGR).
+- **Undiagnosed PROM** — no speculum/nitrazine/AmniSure documented; must be excluded.
+- Fetal renal/urinary tract anomaly (usually earlier onset; not described on the second-trimester scan).
+- Cardiac dysfunction from the AV canal defect (more often causes hydrops/polyhydramnios).
+- Maternal: dehydration; hypertension (BP normal → unlikely); diabetes/vascular disease (not documented); NSAID/ACE-I exposure (none).
+- Placental pathology (infarcts/abruption), possibly fibroid-related; idiopathic.
+*Confidence: Medium*
+
+**29. Likely cause of her SUI?**
+**Urethral hypermobility from childbirth-related pelvic floor/anterior vaginal wall support injury**: 4 vaginal deliveries, the last complicated by a prolonged second stage (levator/pudendal nerve trauma), with symptom onset immediately after that delivery; exam shows mild uterine descent and anterior wall laxity; low-volume leakage only with pressure-raising activity, normal PVR, no urgency — classic SUI. Contributors: age 42–45, BMI 26, enlarged fibroid uterus pressing on the bladder (may also explain later frequency). Intrinsic sphincter deficiency is less likely (no prior pelvic surgery/radiation).
+*Confidence: High*
+
+**30. Why minimal variability without accelerations?**
+- **Fetal hypoxemia/acidemia from placental insufficiency** — most concerning and most consistent with decreased FM + AFI 3 cm; chronic hypoxia depresses CNS/autonomic modulation, abolishing variability and accelerations before decelerations appear.
+- Fetal quiet-sleep cycle (20–40 min, occasionally longer) — benign; requires extended tracing (40–120 min) or vibroacoustic stimulation.
+- Fetal CNS/cardiac abnormality — T21 and AVSD can blunt FHR reactivity; conduction defect possible.
+- Prematurity — minor at 34 wk (≥32-wk criteria apply).
+- Maternal sedatives, magnesium, steroids, smoking, hypoglycemia — none apply (PNV only, never smoker).
+In context this should be treated as possible fetal compromise until proven otherwise.
+*Confidence: Medium*
+
+**31. Brief before admission for fetal monitoring**
+45-year-old African American marketing consultant, never smoker, NKDA, commercial PPO. By structured history G6 P4014 (4 term SVDs, 1 first-trimester miscarriage with D&C; narrative counts are inconsistent); last prior delivery (~2018) complicated by prolonged second stage. Chronic: **SUI** since 2018 (evaluated Jan–Jul 2020; positive cough stress test, PVR 25 mL, mild descent/anterior wall laxity, worsened despite Kegel advice, no treatment plan after urogyn referral); **uterine leiomyoma** (Apr 2020; menorrhagia, pelvic pressure, irregularly enlarged uterus; never imaged/treated); **GAD**; history of cholelithiasis. Only medication: prenatal vitamin. **Current pregnancy:** spontaneous, AMA; declined first-trimester screening; at 17 wk (1/15/23) US showed increased nuchal measurement, hypoplastic nasal bone, short femur, possible endocardial cushion defect; quad screen ordered — **result never documented**; "Down syndrome" placed on problem list without confirmatory testing. 2/15/23 note is a duplicate. **5/15/23 (~34 wk):** decreased FM ×24 h, AFI 3 cm (oligohydramnios), non-reactive NST, BP 120/78 — no plan documented. **Now (6/15/23, ~38–39 wk):** continued decreased FM, AFI 4 cm, admitted for monitoring; BP 122/78, HR 88, FHR 140. Growth, Doppler, BPP, fetal echo, PROM assessment and genetic confirmation are all absent.
+*Confidence: High (GA and gravidity Medium)*
+
+**32. Key risks right now?**
+- **Fetal:** stillbirth (severe oligo + decreased FM + non-reactive NST + suspected T21/AVSD + AMA); intrapartum cord compression → non-reassuring FHR → emergency cesarean; unrecognized FGR; undiagnosed PROM/chorioamnionitis.
+- **Neonatal:** unconfirmed T21 and unevaluated AVSD — needs neonatology/pediatric cardiology at delivery; T21-related hypotonia, feeding problems, GI atresia, polycythemia, hypothyroidism.
+- **Maternal:** AMA 45 (preeclampsia — BP currently normal; GDM never documented); postpartum hemorrhage (5th delivery, fibroids → atony); fibroid-related dystocia/malpresentation; anxiety exacerbation under diagnostic uncertainty.
+- **Systemic:** no plan after non-reactive NST, missing genetic results, inconsistent OB history — fragmentation risk.
+*Confidence: High for identifying risks; magnitudes inferred*
+
+**33. Gynecologic/urogynecologic history from 2020**
+- **1/15/20 (OB/GYN, Dr. Chen):** SUI onset ~2018 after 4th vaginal delivery (prolonged second stage); leakage with exercise/sneezing/laughing/jumping; daily pads; no urgency/nocturia/dysuria; mild uterine descent, slight anterior wall laxity; PVR 25 mL; voiding diary normal frequency, low-volume loss. Dx SUI; behavioral therapy/Kegels first.
+- **4/15/20 (OB/GYN, Dr. Chen):** worsening leakage with cough/sneeze; frequency/urgency ×6 mo noted; menorrhagia and pelvic pressure ×1 yr; irregularly enlarged non-tender uterus, no adnexal mass; UA normal → **leiomyoma** diagnosed clinically (no imaging).
+- **7/15/20 (Urogynecology, Dr. Rodriguez):** leakage progressively worse ×6 mo; regular menses, premenopausal; BMI 26; **positive cough stress test**; UA normal. No plan recorded.
+- **2020–2023:** no further gyn/urogyn care; SUI and leiomyoma persist on problem list; no urodynamics, imaging, treatment, or reassessment during pregnancy.
+*Confidence: High*
+
+**34. Stillbirth risk if pregnancy continues undelivered?**
+Cannot be calculated from the record, but it is **substantially elevated**. Baseline at 38–39 wk ≈ 1–2/1000 per week. Multipliers present: AMA ≥40 (~1.5–2×); oligohydramnios AFI ≤5 (several-fold increase in perinatal mortality); non-reactive NST with decreased FM (marker of compromise); suspected T21 (late fetal loss several percent — roughly 5–10× baseline); congenital heart disease (further increase). Realistically, expectant management for weeks likely carries a risk in the range of **several percent — an order of magnitude above baseline**. At ≥38 wk there is no fetal benefit to continuing; ACOG advises delivery at 36–37 6/7 wk even for *isolated* oligohydramnios.
+*Confidence: Medium (qualitative); Low (any numeric estimate)*
+
+**35. Likely mode and timing of delivery?**
+**Timing:** delivery during this admission (~38–39 wk) — indicated by persistent severe oligohydramnios, decreased FM and prior non-reactive NST. **Mode:** induction of labor with continuous EFM aiming for vaginal birth is reasonable and favored by 4 prior SVDs, no uterine scar and a normal FHR baseline; but expect an elevated cesarean risk (cord compression from oligo, possible placental insufficiency). Cesarean if testing is frankly abnormal (BPP ≤4, abnormal Doppler), non-reassuring FHR in labor, malpresentation, or a lower-segment fibroid. Deliver at a center with NICU and pediatric cardiology. Presentation, cervical exam, growth and Doppler are undocumented; the outcome is not in the record.
+*Confidence: Medium*
+
+**36. How might SUI change after this delivery?**
+Most likely **persists or worsens** in the short term: a 5th vaginal delivery adds pelvic floor/levator/pudendal trauma to pre-existing SUI, and pre-existing symptoms predict persistence. Some improvement over 3–6 months postpartum is typical, but full resolution is unlikely given multiparity, age 45, BMI 26, fibroids and 5-year duration; mild prolapse may also progress. A cesarean would limit incremental injury but not reverse existing SUI. Recommended: postpartum pelvic floor PT, reassessment at 6–12 wk and 6 mo, then urodynamics and midurethral sling once childbearing is complete; address fibroids/menorrhagia.
+*Confidence: Medium*

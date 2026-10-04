@@ -1,0 +1,36 @@
+1. What was her most recent amniotic fluid index?
+2. What was her blood pressure at the last recorded visit?
+3. What was the post-void residual volume at her first urogynecology evaluation?
+4. What are her current active diagnoses?
+5. What medications is she currently taking?
+6. What prenatal tests have been ordered or performed in this pregnancy?
+7. Has she ever had pelvic surgery?
+8. Has she ever had a miscarriage?
+9. Has a diagnostic genetic test (amniocentesis, CVS or cfDNA) ever been done in this pregnancy?
+10. Is "Down syndrome" a diagnosis of the patient or of the fetus, and what evidence confirms it?
+11. How many prior pregnancies and deliveries has she had? Do her records agree?
+12. What was her true gestational age on 2023-01-15 and on 2023-02-15, given that both notes say 17 weeks?
+13. How has her amniotic fluid index changed over the third trimester?
+14. How have her urinary symptoms progressed from January to July 2020?
+15. What is the sequence of events in this pregnancy, from the first prenatal visit to admission?
+16. How many prenatal visits has she had in this pregnancy?
+17. How many encounters has she had with each specialty?
+18. How many distinct clinicians have been involved in her care?
+19. Is her amniotic fluid volume abnormal for gestational age?
+20. Is her nonstress test reassuring?
+21. Is her stress urinary incontinence mild, moderate or severe based on the documented findings?
+22. Where are the quad screen results, and were they ever documented?
+23. What is missing from her record to confirm or exclude fetal trisomy 21?
+24. What follow-up is missing for her stress urinary incontinence after July 2020?
+25. Did her urinary symptoms change after she was counselled on Kegel exercises?
+26. How did fetal assessment findings differ before and after the oligohydramnios diagnosis?
+27. Did her vital signs change between the May 2023 visit and the June 2023 admission?
+28. What could explain her oligohydramnios at this stage of pregnancy?
+29. What is the likely cause of her stress urinary incontinence?
+30. Why is the nonstress test showing minimal variability without accelerations?
+31. Brief me on this patient before her admission for fetal monitoring.
+32. What are the key risks in this pregnancy right now?
+33. Summarise her gynecologic and urogynecologic history from 2020 onward.
+34. What is the risk of stillbirth if this pregnancy continues without delivery?
+35. What is the likely mode and timing of delivery?
+36. How might her stress urinary incontinence change after this delivery?

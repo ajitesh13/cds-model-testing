@@ -1,0 +1,28 @@
+[project]
+name = "thalamus"
+version = "0.1.0"
+description = "Thalamus CDSS phase 1: test harness and tester web app"
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic",
+  "openai",
+  "pydantic>=2",
+  "typer",
+  "pyyaml",
+  "streamlit",
+  "pytest",
+]
+
+[project.scripts]
+thalamus = "thalamus.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["thalamus*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: calls real provider APIs; needs RUN_LIVE=1"]
