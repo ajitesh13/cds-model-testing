@@ -32,7 +32,7 @@ pricing pages; until then cost is shown as "unknown".
 | --- | --- |
 | `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` | Provider keys (environment only) |
 | `APP_USERNAME`, `APP_PASSWORD` | Web login. The app refuses to start if either is unset |
-| `DATA_DIR` | Where `thalamus.db` and `evals/` live (default `./var`, `/data` in Docker) |
+| `DATA_DIR` | Where `thalamus.db` lives (default `./var`, `/data` in Docker) |
 | `MODEL_SELECTION` | `blind` (default; random config per question, model hidden) or `choose` |
 | `ENABLED_CONFIGS` | Comma-separated config ids the web app may use (default: the YAML default) |
 
