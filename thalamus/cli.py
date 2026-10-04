@@ -8,7 +8,7 @@ import typer
 from .adapters.base import load_configs
 from .pipeline import DEFAULT_PATIENT, ask as ask_pipeline
 from .pipeline import fmt_cost, load_serialized, render_text
-from .store import Store, data_dir
+from .store import data_dir, make_store
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help="Thalamus CDSS phase 1 test harness")
 PATIENT_OPT = typer.Option(DEFAULT_PATIENT, "--patient", help="Patient export text file")
@@ -32,7 +32,7 @@ def ask(question: str = typer.Argument(...), patient: Path = PATIENT_OPT,
         if not c["passed"]:
             typer.echo(f"  format check failed: {c['check']} ({c['detail']})")
     typer.echo(f"\nconfig={r.config_id} model={r.model_returned} run_id={r.run_id}\n"
-               f"tokens in={r.input_tokens} (cached {r.cached_input_tokens}) out={r.output_tokens} "
+               f"tokens in={r.input_tokens} (cached {r.cached_input_tokens}, cache-write {r.cache_write_tokens}) out={r.output_tokens} "
                f"cost={fmt_cost(r.cost_usd)} latency={r.latency_ms} ms retries={r.retries}")
     raise typer.Exit(1 if r.status == "error" else 0)
 
@@ -51,7 +51,7 @@ def export(fmt: str = typer.Option("jsonl", "--format", help="jsonl or csv"),
     """Dump all logged runs."""
     if fmt not in ("jsonl", "csv"):
         raise typer.BadParameter("format must be jsonl or csv")
-    for p in Store().export(fmt, out or data_dir() / "export"):
+    for p in make_store().export(fmt, out or data_dir() / "export"):
         typer.echo(f"wrote {p}")
 
 

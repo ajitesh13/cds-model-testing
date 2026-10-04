@@ -20,18 +20,18 @@ thalamus ask "What was her most recent amniotic fluid index?"            # defau
 thalamus ask --config astra-medium "Has she ever had a miscarriage?"
 thalamus export --format csv                                             # dumps all logged runs
 
-APP_USERNAME=me APP_PASSWORD=pw streamlit run app.py
+streamlit run app.py                                                     # login: ajitesh / thalamus (hardcoded in app.py)
 ```
 
-Configs live in `configs/models.yaml` (default: `opus-high`). Fill `configs/pricing.yaml` from the provider
-pricing pages; until then cost is shown as "unknown".
+Configs live in `configs/models.yaml` (default: `opus-high`). `configs/pricing.yaml` holds prices (Anthropic filled from the
+official pricing page; OpenAI still null, so astra cost is shown as "unknown").
 
 ### Environment variables
 
 | Name | Purpose |
 | --- | --- |
 | `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` | Provider keys (environment only) |
-| `APP_USERNAME`, `APP_PASSWORD` | Web login. The app refuses to start if either is unset |
+| `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | Optional. When both are set, runs go to Supabase table `thalamus_harness_runs` (migration in `supabase/migrations/`). A failed write falls back to local SQLite, so no run is lost |
 | `DATA_DIR` | Where `thalamus.db` lives (default `./var`, `/data` in Docker) |
 | `MODEL_SELECTION` | `blind` (default; random config per question, model hidden) or `choose` |
 | `ENABLED_CONFIGS` | Comma-separated config ids the web app may use (default: the YAML default) |
@@ -40,5 +40,5 @@ pricing pages; until then cost is shown as "unknown".
 
 - Serve only over HTTPS: the login form sends credentials.
 - Use separate API keys for the deployed app, with provider-side spend caps.
-- Keep the URL unlisted. There is one shared login and no rate limiting beyond a 1 s delay on a failed login.
-- `DATA_DIR` must be on a persistent disk. SQLite needs real file locking, so mount a persistent disk at `/data`.
+- The web login is hardcoded in `app.py` (username `ajitesh`, password `thalamus`); it is in the repo, so keep the repo private and the data synthetic. Keep the URL unlisted. There is one shared login and no rate limiting beyond a 1 s delay on a failed login.
+- With Supabase configured the app is stateless and needs no persistent disk. Without it, `DATA_DIR` must be on a persistent disk. SQLite needs real file locking, so mount a persistent disk at `/data`.

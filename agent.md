@@ -30,7 +30,7 @@ Before building anything, say which intent it serves. If none, don't build it. I
 
 | Phase | Goal | Status |
 | --- | --- | --- |
-| 1. Basic harness | Ask, send prompt and record, get a cited and checked answer, log everything | Code complete (76 tests pass, 2 live skipped). Open: live smoke call per provider, pricing, spend-capped keys, Docker build, deploy |
+| 1. Basic harness | Ask, send prompt and record, get a cited and checked answer, log everything | Code complete (81 tests pass, 2 live skipped). Anthropic verified live (model ID, cache, Supabase write). Open: OpenAI smoke call and pricing, spend-capped keys, Docker build, deploy |
 | 2. Model selection | Pick model and effort from six configs using doctor-graded evidence | Not started. Eval runner and ratings return here |
 | 3. Determinism | Canonicalizer, answer cache, always-on flags block, policy rules | Not started |
 
@@ -47,11 +47,12 @@ Phase 1 is the harness only. The eval runner and ratings were removed on purpose
 | `thalamus/verify.py` | Citation verifier: normalized, boundary-aware matching against the cited row. Format checks are logged, not blocking |
 | `thalamus/adapters/` | `base.py` (retry, backoff, model-ID check), `anthropic_adapter.py`, `openai_adapter.py` |
 | `thalamus/pipeline.py` | One call per question, plus at most one schema retry and one citation retry. Status: `verified`, `unverified`, `failed_schema`, `error` |
-| `thalamus/store.py` | SQLite `runs` table, WAL mode |
+| `thalamus/store.py` | `Store` (SQLite `runs`, WAL) and `SupabaseStore` (table `thalamus_harness_runs`, PostgREST, SQLite fallback on write failure). `make_store()` picks by env |
+| `supabase/migrations/` | Migration for `thalamus_harness_runs` (same Supabase project as `thalamus_chat_log`; not yet applied) |
 | `thalamus/cli.py` | `ask`, `show-record`, `export` |
 | `app.py` | Streamlit app: `hmac.compare_digest` login, blind or choose model mode, verified/unverified badge, session history |
 | `configs/models.yaml` | Six configs; default `opus-high` (`claude-opus-5-5`, effort high) |
-| `configs/pricing.yaml` | Prices per model; all null so far, cost shows "unknown" |
+| `configs/pricing.yaml` | USD per million tokens (input, output, cache read, cache write). Anthropic filled; OpenAI null so cost shows "unknown" |
 | `prompts/system_v1.md` | System prompt v1 (house rules, three answer shapes) |
 | `data/` | `patient_2744.txt`, `questions_2744.txt` (36 questions) |
 | `tests/` | Offline tests with mocked adapters; live tests need `RUN_LIVE=1` |
@@ -83,7 +84,7 @@ pytest                                   # offline
 thalamus show-record
 thalamus ask "What was her most recent amniotic fluid index?"
 thalamus export --format csv
-APP_USERNAME=me APP_PASSWORD=pw streamlit run app.py
+streamlit run app.py                     # login: ajitesh / thalamus
 ```
 
 ## Before you finish a task
@@ -96,5 +97,5 @@ APP_USERNAME=me APP_PASSWORD=pw streamlit run app.py
 ## Open decisions (need the user)
 
 - Deployment host: Compute Engine VM with persistent disk, Caddy and sslip.io (recommended), or Cloud Run with a GCS volume.
-- How `APP_PASSWORD` is set and how API keys reach Secret Manager.
+- How API keys reach Secret Manager. (The web login is hardcoded in `app.py`.)
 - Live smoke calls: needs the user's API keys and approval.

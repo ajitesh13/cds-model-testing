@@ -115,11 +115,13 @@ def load_pricing(path: Path = PRICING_YAML) -> dict:
 def cost_usd(cfg: ModelConfig, c: Completion, pricing: dict | None = None) -> float | None:
     """None => unknown (any needed price is null)."""
     p = (pricing if pricing is not None else load_pricing()).get(cfg.model) or {}
-    inp, out, cached = p.get("input_per_mtok"), p.get("output_per_mtok"), p.get("cached_input_per_mtok")
+    inp, out = p.get("input_per_mtok"), p.get("output_per_mtok")
+    cached, write = p.get("cached_input_per_mtok"), p.get("cache_write_per_mtok")
     if inp is None or out is None:
         return None
-    if c.cached_input_tokens and cached is None:
+    if (c.cached_input_tokens and cached is None) or (c.cache_write_tokens and write is None):
         return None
-    uncached = c.input_tokens - c.cached_input_tokens
-    total = uncached * inp + c.output_tokens * out + c.cached_input_tokens * (cached or 0)
+    uncached = c.input_tokens - c.cached_input_tokens - c.cache_write_tokens
+    total = (uncached * inp + c.output_tokens * out + c.cached_input_tokens * (cached or 0)
+             + c.cache_write_tokens * (write or 0))
     return total / 1_000_000

@@ -16,8 +16,6 @@ GOOD = json.dumps({
 
 @pytest.fixture
 def env(monkeypatch, tmp_path):
-    monkeypatch.setenv("APP_USERNAME", "tester")
-    monkeypatch.setenv("APP_PASSWORD", "s3cret")
     monkeypatch.setenv("DATA_DIR", str(tmp_path))
     monkeypatch.setenv("ENABLED_CONFIGS", "opus-high")
     monkeypatch.delenv("MODEL_SELECTION", raising=False)
@@ -30,24 +28,16 @@ def app():
 
 
 def login(at):
-    at.text_input[0].set_value("tester")
-    at.text_input[1].set_value("s3cret")
+    at.text_input[0].set_value("ajitesh")
+    at.text_input[1].set_value("thalamus")
     at.button[0].click().run()
 
 
-def test_refuses_without_credentials(monkeypatch):
-    monkeypatch.delenv("APP_USERNAME", raising=False)
-    monkeypatch.delenv("APP_PASSWORD", raising=False)
-    at = app().run()
-    assert any("must be set" in e.value for e in at.error)
-    assert not at.text_area
-
-
 def test_login_required_and_wrong_password(env, monkeypatch):
-    monkeypatch.setattr("time.sleep", lambda s: None)
     at = app().run()
     assert not at.text_area and at.button[0].label == "Log in"
-    at.text_input[0].set_value("tester")
+    monkeypatch.setattr("time.sleep", lambda s: None)  # after the first run: Streamlit's own wait loop uses sleep
+    at.text_input[0].set_value("ajitesh")
     at.text_input[1].set_value("wrong")
     at.button[0].click().run()
     assert any("Incorrect" in e.value for e in at.error) and not at.text_area

@@ -10,7 +10,7 @@ from .answer import Answer, AnswerParseError, parse_answer
 from .prompt import load_system, prompt_version, question_block, record_block
 from .record import load_record
 from .serialize import Serialized, serialize
-from .store import Store
+from .store import Store, SupabaseStore, make_store
 from .verify import Verification, format_checks, verify_citations
 
 DEFAULT_PATIENT = Path(__file__).resolve().parent.parent / "data" / "patient_2744.txt"
@@ -29,6 +29,7 @@ class RunResult:
     input_tokens: int = 0
     output_tokens: int = 0
     cached_input_tokens: int = 0
+    cache_write_tokens: int = 0
     cost_usd: float | None = None
     latency_ms: int = 0
     retries: int = 0
@@ -45,10 +46,10 @@ def _model_ok(cfg: ModelConfig, comp: Completion) -> bool:
 
 
 def ask(question: str, cfg: ModelConfig, *, source: str, ser: Serialized | None = None,
-        patient_path: str | Path = DEFAULT_PATIENT, store: Store | None = None, adapter=None,
+        patient_path: str | Path = DEFAULT_PATIENT, store: Store | SupabaseStore | None = None, adapter=None,
         session_id: str | None = None, rater_label: str | None = None, question_id: str | None = None,
-        pricing: dict | None = None) -> RunResult:
-    store = store or Store()
+        pricing: dict | None = None, extra: dict | None = None) -> RunResult:
+    store = store or make_store()
     ser = ser or load_serialized(patient_path)
     system, rb, qb = load_system(), record_block(ser.text), question_block(question)
     calls: list[Completion] = []
@@ -103,7 +104,8 @@ def ask(question: str, cfg: ModelConfig, *, source: str, ser: Serialized | None 
         status=status, answer=answer, verification=verification.to_dict() if verification else {},
         format_checks=fmt, model_returned=last.model_returned if last else "",
         input_tokens=tot("input_tokens"), output_tokens=tot("output_tokens"),
-        cached_input_tokens=tot("cached_input_tokens"), cost_usd=cost, latency_ms=tot("latency_ms"),
+        cached_input_tokens=tot("cached_input_tokens"),
+        cache_write_tokens=tot("cache_write_tokens"), cost_usd=cost, latency_ms=tot("latency_ms"),
         retries=tot("retries") + max(len(calls) - 1, 0), error=error,
     )
     result.run_id = store.insert_run(
@@ -115,7 +117,9 @@ def ask(question: str, cfg: ModelConfig, *, source: str, ser: Serialized | None 
         verification_json=json.dumps(result.verification), format_checks_json=json.dumps(fmt),
         raw_response_json=json.dumps([c.raw for c in calls]), input_tokens=result.input_tokens,
         output_tokens=result.output_tokens, cached_input_tokens=result.cached_input_tokens,
+        cache_write_tokens=result.cache_write_tokens,
         cost_usd=cost, latency_ms=result.latency_ms, retries=result.retries, error=error,
+        patient=Path(patient_path).stem, **(extra or {}),
     )
     return result
 

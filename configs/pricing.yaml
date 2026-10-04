@@ -1,5 +1,8 @@
-# USD per million tokens. Fill from the provider pricing pages; null => cost shown as "unknown".
-# cached_input_per_mtok applies to cache-read tokens. Cache-write tokens are billed at input_per_mtok here.
-claude-opus-5-5:  {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null}
-claude-fable-5-1: {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null}
-gpt-6-astra:      {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null}
+# USD per million tokens, standard global pricing, no batch or fast mode.
+# Source: https://platform.claude.com/docs/en/about-claude/pricing (checked 2026-10-04).
+# Fill from the provider pricing page; null => cost shown as "unknown".
+# cached_input_per_mtok = cache reads; cache_write_per_mtok = cache writes (Anthropic 5-minute cache, the
+# default `ephemeral` we send; 1.25x base input). Opus 5.5 reads are 0.05x input, Fable 5.1 reads 0.025x.
+claude-opus-5-5:  {input_per_mtok: 4.0,  output_per_mtok: 20.0, cached_input_per_mtok: 0.20, cache_write_per_mtok: 5.0}
+claude-fable-5-1: {input_per_mtok: 10.0, output_per_mtok: 50.0, cached_input_per_mtok: 0.25, cache_write_per_mtok: 12.5}
+gpt-6-astra:      {input_per_mtok: null, output_per_mtok: null, cached_input_per_mtok: null, cache_write_per_mtok: null}

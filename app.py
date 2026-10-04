@@ -9,26 +9,35 @@ import streamlit as st
 
 from thalamus.adapters.base import load_configs
 from thalamus.pipeline import DEFAULT_PATIENT, ask, fmt_cost, load_serialized
-from thalamus.store import Store
+from thalamus.store import make_store
 
 st.set_page_config(page_title="Thalamus", page_icon="🩺", layout="centered")
 
-APP_USERNAME = os.environ.get("APP_USERNAME")
-APP_PASSWORD = os.environ.get("APP_PASSWORD")
-if not APP_USERNAME or not APP_PASSWORD:
-    st.error("APP_USERNAME and APP_PASSWORD must be set. The app will not start without them.")
-    st.stop()
+# Hardcoded on purpose (phase 1, synthetic data only). Replace before any real patient data.
+APP_USERNAME = "ajitesh"
+APP_PASSWORD = "thalamus"
 
 
 @st.cache_resource
 def load_resources():
     cfgs, default = load_configs()
-    return load_serialized(DEFAULT_PATIENT), Store(), cfgs, default
+    return load_serialized(DEFAULT_PATIENT), make_store(), cfgs, default
 
 
 def enabled_configs(cfgs, default):
     ids = [c.strip() for c in (os.environ.get("ENABLED_CONFIGS") or default).split(",") if c.strip()]
     return [cfgs[i] for i in ids if i in cfgs] or [cfgs[default]]
+
+
+def caller_info() -> dict:
+    """Caller details from request headers (client IP is the last X-Forwarded-For entry, as the host saw it)."""
+    try:
+        h = st.context.headers
+    except Exception:  # noqa: BLE001 - headers unavailable (older Streamlit, tests)
+        return {}
+    fwd = (h.get("X-Forwarded-For") or "").split(",")[-1].strip()
+    return {"client_ip": fwd or None, "origin": (h.get("Origin") or h.get("Host") or "")[:200] or None,
+            "user_agent": (h.get("User-Agent") or "")[:400] or None}
 
 
 def check_login(user: str, password: str) -> bool:
@@ -97,7 +106,7 @@ def render_run(item: dict, expanded: bool) -> None:
                 for f in r.verification.get("failures", []):
                     st.markdown(f"- Claim {f['claim_index'] + 1}: {f['problem']}")
         if not blind:
-            st.caption(f"{r.config_id} · {r.model_returned} · in {r.input_tokens} (cached {r.cached_input_tokens}) "
+            st.caption(f"{r.config_id} · {r.model_returned} · in {r.input_tokens} (cached {r.cached_input_tokens}, cache-write {r.cache_write_tokens}) "
                        f"· out {r.output_tokens} · cost {fmt_cost(r.cost_usd)} · {r.latency_ms / 1000:.1f}s")
 
 
@@ -130,7 +139,7 @@ if asked:
         with st.spinner("Working on it. Answers can take up to a couple of minutes."):
             try:
                 result = ask(question.strip(), chosen, source="web", ser=ser, store=store,
-                             session_id=st.session_state.session_id,
+                             session_id=st.session_state.session_id, extra=caller_info(),
                              rater_label=st.session_state.get("rater_label") or None)
             except Exception as e:  # noqa: BLE001 - never show a stack trace to testers
                 result = None

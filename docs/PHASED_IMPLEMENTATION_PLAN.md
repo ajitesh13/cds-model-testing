@@ -56,22 +56,25 @@ A small program that takes one patient record and one question, sends both to a 
 - [x] Serializer and header + tests (GA anchors match the hand-calculated table)
 - [x] Answer schema, parser and citation checker + tests (15 planted-error answers all flagged)
 - [x] Prompt assembly and both adapters with mocked tests
-- [ ] One live smoke call per provider; confirm returned model IDs match (needs API keys and approval; open)
+- [ ] One live smoke call per provider; confirm returned model IDs match (open: `opus-high` done 2026-10-04, model ID matched, verified; OpenAI astra still to do)
 - [x] Pipeline, storage, CLI `ask` and `show-record`
 - [x] CLI `export` (`eval` dropped from phase 1)
 - [x] Streamlit app with login, blind/choose mode, session history (ratings dropped from phase 1)
 - [x] Dockerfile, `.env.example`, README (Docker image not yet built; daemon was down)
 - [ ] Create separate API keys for the deployed app with provider-side spend caps
-- [ ] Fill `configs/pricing.yaml` (all prices still null; cost shows "unknown")
+- [ ] Fill `configs/pricing.yaml` (open: Anthropic done 2026-10-04 from the official pricing page, incl. cache-write price; OpenAI `gpt-6-astra` still null, so astra cost shows "unknown")
+- [x] Log `cache_write_tokens` (SQLite + Supabase column) and include cache writes in cost; cost hand-checked against a live run
 - [ ] Deploy to a host with a persistent volume; share URL and credentials with testers (open: Compute Engine VM vs Cloud Run, project `kado-care`, password and API-key handling)
-- [ ] GCP deploy section in README
+- [x] `SupabaseStore` and `thalamus_harness_runs` migration written, tested offline (not yet applied to the Supabase project)
+- [x] Migration applied to Supabase project `ygovtjqzztschecrqufq` (2026-10-04); live write and read verified (run b15aecbd, no SQLite fallback used)
+- [ ] GCP deploy section in README (with Supabase the app is stateless, so Cloud Run becomes viable)
 
 ### Exit criteria
 
 - [x] All tests pass (76 passed, 2 live skipped)
 - [x] Serializing patient 2744 ten times gives the same hash
 - [ ] `thalamus ask` works live for all six configs, and every logged model ID matches the request (not yet run live)
-- [ ] Prompt cache hits appear in logged token counts (needs live calls; Opus minimum cacheable prefix to confirm)
+- [x] Prompt cache hits appear in logged token counts (Anthropic verified 2026-10-04: 9,466 of 9,499 input tokens cached on calls within the 5-minute TTL, including with a different question; OpenAI still to check)
 - [ ] Web app requires login, accepts any question, and keeps run data across restarts (login and logging tested; persistence on the deployed volume untested)
 - [ ] Deployed at an HTTPS URL with a persistent volume
 
@@ -81,7 +84,7 @@ Removed from phase 1: `thalamus eval` on the 36 questions with `metrics.csv`, `g
 
 - Whole record in the prompt; no RAG, no vector database
 - Code does all date and age arithmetic; the model never does
-- Static username and password from env vars; no question limits
+- Static, hardcoded login in `app.py` (decided 2026-10-04): username `ajitesh`, password `thalamus`. Not env vars. Acceptable only because the repo is private and the data is synthetic; replace with real auth before any real patient data. No question limits
 - Blind mode is supported in the web app (`MODEL_SELECTION`), but only `opus-high` is enabled and it is the default model (changed from medium-effort configs enabled). Blinding has no effect until more than one config is enabled.
 - No eval flow and no ratings in phase 1; a doctor reviews answers manually
 - No aggregate numeric risk estimates (system prompt rule 11; revisit in phase 2)
@@ -116,7 +119,7 @@ Effort labels are not calibrated across providers, so configs are compared on co
 
 ### Tasks
 
-- [ ] Fill `pricing.yaml` from provider pricing pages (carried over if still open from phase 1)
+- [ ] Fill the remaining `pricing.yaml` entries (OpenAI) from the provider pricing page (carried over from phase 1)
 - [ ] Rebuild the eval runner removed from phase 1: run all questions across configs, write `metrics.csv`, `grading.csv` and `key.csv`
 - [ ] Rebuild grading storage (ratings table) and a blinded grading view for the doctor
 - [ ] Enable all six configs in the app (`ENABLED_CONFIGS`) so blind mode is meaningful

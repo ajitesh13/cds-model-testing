@@ -204,10 +204,21 @@ def test_strict_schema():
 
 def test_cost_unknown_when_price_null_and_known_when_set():
     c = Completion("t", "m", 1_000_000, 100_000, 400_000, 1)
-    assert cost_usd(CFGS["opus-high"], c) is None  # shipped pricing.yaml is all null
+    assert cost_usd(CFGS["astra-high"], c) is None  # astra prices in pricing.yaml are still null
     pricing = {"claude-opus-5-5": {"input_per_mtok": 4.0, "output_per_mtok": 20.0, "cached_input_per_mtok": 0.4}}
     assert cost_usd(CFGS["opus-high"], c, pricing) == pytest.approx(0.6 * 4 + 0.1 * 20 + 0.4 * 0.4)
     assert cost_usd(CFGS["opus-high"], c, {"claude-opus-5-5": {**pricing["claude-opus-5-5"], "cached_input_per_mtok": None}}) is None
+
+
+def test_cost_includes_cache_write_and_real_pricing_file():
+    # Real run b15aecbd/d4fd3d17: 33 uncached + 9,466 cache-write input tokens, 1,089 output tokens.
+    c = Completion("t", "m", 9499, 1089, 0, 1, cache_write_tokens=9466)
+    assert cost_usd(CFGS["opus-high"], c) == pytest.approx((33 * 4 + 9466 * 5 + 1089 * 20) / 1e6)
+    r = Completion("t", "m", 9499, 1089, 9466, 1)  # a cache read instead
+    assert cost_usd(CFGS["opus-high"], r) == pytest.approx((33 * 4 + 9466 * 0.20 + 1089 * 20) / 1e6)
+    assert cost_usd(CFGS["fable-high"], c) == pytest.approx((33 * 10 + 9466 * 12.5 + 1089 * 50) / 1e6)
+    no_write_price = {"claude-opus-5-5": {"input_per_mtok": 4.0, "output_per_mtok": 20.0, "cached_input_per_mtok": 0.2}}
+    assert cost_usd(CFGS["opus-high"], c, no_write_price) is None
 
 
 def test_get_adapter():

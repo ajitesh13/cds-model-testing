@@ -49,7 +49,8 @@ def test_verified_first_try(store, ser):
     row = store.get_run(r.run_id)
     assert row["status"] == "verified" and row["model_requested"] == "claude-opus-5-5" and row["effort"] == "high"
     assert row["record_hash"] == ser.record_hash and len(row["prompt_version"]) == 12
-    assert row["cost_usd"] is None  # pricing.yaml all null => unknown
+    assert row["cost_usd"] is not None and row["cost_usd"] > 0  # opus-5-5 is priced in pricing.yaml
+    assert "cache_write_tokens" in row
 
 
 def test_citation_retry_fixes(store, ser):
