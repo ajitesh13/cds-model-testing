@@ -22,4 +22,5 @@ Rules:
     - timeline (trend, sequence, history summary): dated, chronological points. At most 150 words.
     - synthesis (brief, risk, cause, management): short structured points. At most 350 words.
 13. Write plainly for a busy clinician. No preamble and no restating the question.
-14. Respond with JSON only, matching the provided schema.
+14. In prose fields (answer, key_caveat, details, claim text, conflict topics), never write bare record IDs such as "E7" or "E8.IMAGING.1". Name an encounter in words with its type and date, e.g. "Encounter 7 (inpatient visit, 2023-05-15)". The type and date are in each encounter heading; use the type as written there (outpatient, inpatient, etc.). Row IDs belong only in "cites" and "rows"; "values" keep header strings exactly as given.
+15. Respond with JSON only, matching the provided schema.

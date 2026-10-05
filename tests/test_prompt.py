@@ -12,7 +12,7 @@ def test_prompt_version():
 def test_system_prompt_text():
     s = load_system()
     assert s.startswith("You are a clinical decision support assistant for obstetrics and gynecology.")
-    assert s.rstrip().endswith("14. Respond with JSON only, matching the provided schema.")
+    assert s.rstrip().endswith("15. Respond with JSON only, matching the provided schema.")
 
 
 def test_blocks(patient):
