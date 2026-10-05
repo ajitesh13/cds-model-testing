@@ -60,24 +60,24 @@ A small program that takes one patient record and one question, sends both to a 
 - [x] Pipeline, storage, CLI `ask` and `show-record`
 - [x] CLI `export` (`eval` dropped from phase 1)
 - [x] Streamlit app with login, blind/choose mode, session history (ratings dropped from phase 1)
-- [x] Dockerfile, `.env.example`, README (Docker image not yet built; daemon was down)
+- [x] Dockerfile, `.env.example`, README (image built by Cloud Build on deploy, 2026-10-05; local Docker build not tested)
 - [ ] Create separate API keys for the deployed app with provider-side spend caps
 - [ ] Fill `configs/pricing.yaml` (open: Anthropic done 2026-10-04 from the official pricing page, incl. cache-write price; OpenAI `gpt-6-astra` still null, so astra cost shows "unknown")
 - [x] Log `cache_write_tokens` (SQLite + Supabase column) and include cache writes in cost; cost hand-checked against a live run
-- [ ] Deploy to a host with a persistent volume; share URL and credentials with testers (open: Compute Engine VM vs Cloud Run, project `kado-care`, password and API-key handling)
-- [x] `SupabaseStore` and `thalamus_harness_runs` migration written, tested offline (not yet applied to the Supabase project)
+- [x] Deployed to a host: Cloud Run chosen over a VM; runs persist in Supabase, so no volume is needed (see the Cloud Run item below). Open: share URL and credentials with testers
+- [x] `SupabaseStore` and `thalamus_harness_runs` migration written, tested offline
 - [x] Migration applied to Supabase project `ygovtjqzztschecrqufq` (2026-10-04); live write and read verified (run b15aecbd, no SQLite fallback used)
-- [x] Deployed to Cloud Run (`thalamus-cds`, kado-care, asia-south1, 2026-10-05) at https://thalamus-cds-4hoqiixfyq-el.a.run.app; GCP deploy section in README. Public URL, gated only by the hardcoded app login; browser end-to-end test by the owner pending
-- [x] Manual GitHub Action redeploy (`.github/workflows/deploy-cds.yml`); one-time `deploy/gcp_ci_setup.sh` still to be run
+- [x] Deployed to Cloud Run (`thalamus-cds`, kado-care, asia-south1, 2026-10-05) at https://thalamus-cds-4hoqiixfyq-el.a.run.app; GCP deploy section in README. Public URL, gated only by the hardcoded app login; revision `thalamus-cds-00004-gbw` live, `/_stcore/health` 200 (2026-10-05); browser end-to-end test by the owner pending
+- [x] Manual GitHub Action redeploy (`.github/workflows/deploy-cds.yml`); one-time `deploy/gcp_ci_setup.sh` run; Action run 37261871406 succeeded (2026-10-05)
 
 ### Exit criteria
 
-- [x] All tests pass (76 passed, 2 live skipped)
+- [x] All tests pass (81 passed, 2 live skipped)
 - [x] Serializing patient 2744 ten times gives the same hash
 - [ ] `thalamus ask` works live for all six configs, and every logged model ID matches the request (not yet run live)
 - [x] Prompt cache hits appear in logged token counts (Anthropic verified 2026-10-04: 9,466 of 9,499 input tokens cached on calls within the 5-minute TTL, including with a different question; OpenAI still to check)
-- [ ] Web app requires login, accepts any question, and keeps run data across restarts (login and logging tested; persistence on the deployed volume untested)
-- [ ] Deployed at an HTTPS URL with a persistent volume
+- [ ] Web app requires login, accepts any question, and keeps run data across restarts (login and logging tested; runs stored in Supabase; owner's browser test of the deployed app pending)
+- [x] Deployed at an HTTPS URL (Cloud Run); persistence via Supabase instead of a volume
 
 Removed from phase 1: `thalamus eval` on the 36 questions with `metrics.csv`, `grading.csv`, `key.csv`; saving ratings.
 
@@ -89,6 +89,8 @@ Removed from phase 1: `thalamus eval` on the 36 questions with `metrics.csv`, `g
 - Blind mode is supported in the web app (`MODEL_SELECTION`), but only `opus-high` is enabled and it is the default model (changed from medium-effort configs enabled). Blinding has no effect until more than one config is enabled.
 - No eval flow and no ratings in phase 1; a doctor reviews answers manually
 - No aggregate numeric risk estimates (system prompt rule 11; revisit in phase 2)
+- Host: Cloud Run (`thalamus-cds`, kado-care, asia-south1), public URL gated by the app login, one instance with session affinity, runs in Supabase (decided 2026-10-05)
+- Prose names encounters in words, e.g. "Encounter 7 (inpatient visit, 2023-05-15)", never bare `E7` (system prompt rule 14, 2026-10-05). Serves traceable and readable; row IDs stay in `cites` and `rows`. Not yet checked on a live answer; applies to all configs, so phase 2 evals use this prompt
 
 ---
 

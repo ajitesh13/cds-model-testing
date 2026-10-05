@@ -4,7 +4,7 @@ Entry point for any agent or engineer working in this repo. Read this first, the
 
 ## What this project is
 
-Thalamus is an OB/GYN clinical decision support (CDS) test harness. A doctor asks a question about one patient (synthetic patient 2744). The system prompt, a code-computed header and the full serialized record go to a selectable LLM in one call. The answer comes back as JSON with cited record rows. Code verifies every citation. Every run is logged to SQLite. A Streamlit app behind a static login serves testers.
+Thalamus is an OB/GYN clinical decision support (CDS) test harness. A doctor asks a question about one patient (synthetic patient 2744). The system prompt, a code-computed header and the full serialized record go to a selectable LLM in one call. The answer comes back as JSON with cited record rows. Code verifies every citation. Every run is logged (Supabase, SQLite fallback). A Streamlit app behind a static login serves testers.
 
 Scope: one patient at a time, synthetic data only, obstetrics and gynecology. No real patient data until after phase 3 and DPDP-compliant infrastructure.
 
@@ -30,7 +30,7 @@ Before building anything, say which intent it serves. If none, don't build it. I
 
 | Phase | Goal | Status |
 | --- | --- | --- |
-| 1. Basic harness | Ask, send prompt and record, get a cited and checked answer, log everything | Code complete (81 tests pass, 2 live skipped). Anthropic verified live (model ID, cache, Supabase write). Open: OpenAI smoke call and pricing, spend-capped keys, Docker build, deploy |
+| 1. Basic harness | Ask, send prompt and record, get a cited and checked answer, log everything | Code complete (81 tests pass, 2 live skipped). Deployed to Cloud Run. Anthropic verified live (model ID, cache, Supabase write). Open: OpenAI smoke call and pricing, spend-capped keys, live check of encounter wording, owner's browser test |
 | 2. Model selection | Pick model and effort from six configs using doctor-graded evidence | Not started. Eval runner and ratings return here |
 | 3. Determinism | Canonicalizer, answer cache, always-on flags block, policy rules | Not started |
 
@@ -48,7 +48,7 @@ Phase 1 is the harness only. The eval runner and ratings were removed on purpose
 | `thalamus/adapters/` | `base.py` (retry, backoff, model-ID check), `anthropic_adapter.py`, `openai_adapter.py` |
 | `thalamus/pipeline.py` | One call per question, plus at most one schema retry and one citation retry. Status: `verified`, `unverified`, `failed_schema`, `error` |
 | `thalamus/store.py` | `Store` (SQLite `runs`, WAL) and `SupabaseStore` (table `thalamus_harness_runs`, PostgREST, SQLite fallback on write failure). `make_store()` picks by env |
-| `supabase/migrations/` | Migration for `thalamus_harness_runs` (same Supabase project as `thalamus_chat_log`; not yet applied) |
+| `supabase/migrations/` | Migration for `thalamus_harness_runs` (same Supabase project as `thalamus_chat_log`; applied 2026-10-04) |
 | `thalamus/cli.py` | `ask`, `show-record`, `export` |
 | `app.py` | Streamlit app: `hmac.compare_digest` login, blind or choose model mode, "Citation match n/m" badge (green when all pass, orange otherwise), session history |
 | `configs/models.yaml` | Six configs; default `opus-high` (`claude-opus-5-5`, effort high) |
@@ -99,6 +99,5 @@ streamlit run app.py                     # login: ajitesh / thalamus
 
 ## Open decisions (need the user)
 
-- Deployment host: Compute Engine VM with persistent disk, Caddy and sslip.io (recommended), or Cloud Run with a GCS volume.
-- How API keys reach Secret Manager. (The web login is hardcoded in `app.py`.)
+- Provider-side spend caps for the deployed app's API keys. (Host is Cloud Run; keys are in Secret Manager via `deploy/gcp_cloud_run.sh`; the web login is hardcoded in `app.py`.)
 - Live smoke calls: needs the user's API keys and approval.
